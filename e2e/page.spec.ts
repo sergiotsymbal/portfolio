@@ -63,3 +63,14 @@ test("buttons whose text turns dark on hover also get the gold background (text 
       .toBe(true);
   }
 });
+
+test("contact links come from data/contacts.json", async ({ page }) => {
+  const { contacts } = await import("../data/contacts");
+  await gotoHome(page);
+  const section = page.locator("#contacts");
+  for (const c of [contacts.phone, contacts.telegram, contacts.email]) {
+    await expect(section.getByRole("link", { name: c.text })).toHaveAttribute("href", c.href);
+  }
+  expect(contacts.telegram.href).toMatch(/^https:\/\/t\.me\/[A-Za-z]/);
+  expect(contacts.phone.href).toMatch(/^tel:\+?\d+$/);
+});

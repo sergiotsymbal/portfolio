@@ -1,4 +1,4 @@
-import { contacts } from "@/data/site";
+import { contacts } from "@/data/contacts";
 
 export default function FormError() {
   return (

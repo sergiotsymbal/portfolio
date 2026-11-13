@@ -1,7 +1,7 @@
 "use client";
 
 import { contactServiceOptions } from "@/data/services";
-import { contacts } from "@/data/site";
+import { contacts } from "@/data/contacts";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 import FormError from "../FormError";
 import FieldError from "../FieldError";

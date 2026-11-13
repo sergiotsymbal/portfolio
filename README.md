@@ -60,11 +60,30 @@ Every submission includes a `form` field (`booking`, `contact` or `book-preorder
 | --- | --- |
 | Blog articles | `data/articles.json` — see below |
 | Services (cards + contact form options) | `data/services.ts` |
-| Phone / Telegram / e-mail | `data/site.ts` |
+| Phone / Telegram / e-mail | `data/contacts.json` — see below |
 | Gallery (auto-scrolling carousel from 3 photos up) | `data/gallery.ts` |
 | Event announcement | `components/sections/TastingEvent.tsx` |
 | Any section's layout/text | `components/sections/*.tsx` |
 | Local images | put the original in `assets/images/`, add a job in `scripts/optimize-images.mjs`, run `npm run images` → web-ready WebP/JPEG in `public/images/` |
+
+## Contact details
+
+Phone, Telegram and e-mail live only in **`data/contacts.json`**; the contacts section and the form error message
+read them from there.
+
+```json
+{
+  "phone": "+380 67 123 45 67",
+  "telegram": "don_sergio",
+  "email": "hello@donsergio.org"
+}
+```
+
+- `phone` — written the way it should be shown; the call link is built from its digits.
+- `telegram` — the username (`don_sergio`, `@don_sergio` or `https://t.me/don_sergio` all work).
+- `email` — the address.
+
+A typo (no digits in the phone, invalid username or e-mail) stops `npm run build` with a message naming the field.
 
 ## Blog articles
 
