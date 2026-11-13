@@ -17,6 +17,8 @@ export function useFormSubmit(form: FormName, extra?: Record<string, string>) {
       new FormData(el).forEach((v, k) => {
         if (typeof v === "string") data[k] = v.trim();
       });
+      // Honeypot: only sent when filled (i.e. by a bot), so the server can drop it.
+      if (!data.website) delete data.website;
       setStatus("sending");
       try {
         await submitForm(form, data);

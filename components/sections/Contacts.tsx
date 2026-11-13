@@ -4,6 +4,7 @@ import { contactServiceOptions } from "@/data/services";
 import { contacts } from "@/data/site";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 import FormError from "../FormError";
+import Honeypot from "../Honeypot";
 
 const inputClass =
   "w-full bg-gaudi-card border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition";
@@ -60,7 +61,8 @@ export default function Contacts() {
             <h3 className="text-2xl font-serif font-bold text-neutral-100 mb-6 pt-4">Залишити запит на замовлення</h3>
 
             {status !== "success" ? (
-              <form onSubmit={onSubmit} className="space-y-4">
+              <form onSubmit={onSubmit} className="relative space-y-4">
+                <Honeypot />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-name" className={labelClass}>Ім&apos;я *</label>

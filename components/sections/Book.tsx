@@ -2,6 +2,7 @@
 
 import { useFormSubmit } from "@/lib/useFormSubmit";
 import FormError from "../FormError";
+import Honeypot from "../Honeypot";
 
 const inputClass =
   "w-full bg-gaudi-card border border-gold/50 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition";
@@ -53,7 +54,8 @@ export default function Book() {
             </p>
 
             {status !== "success" ? (
-              <form onSubmit={onSubmit} className="space-y-4 pt-2">
+              <form onSubmit={onSubmit} className="relative space-y-4 pt-2">
+                <Honeypot />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="book-name" className={labelClass}>Ім&apos;я *</label>

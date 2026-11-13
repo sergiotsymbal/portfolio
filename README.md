@@ -23,6 +23,7 @@ npm run check        # typecheck + lint + production build + e2e tests (everythi
 npm run typecheck
 npm run lint
 npm run test:e2e     # Playwright, desktop (1440px) + mobile (Pixel 7)
+npm run test:sheets  # Google Apps Script (forms → Google Sheets)
 npx playwright show-report   # HTML report of the last run
 ```
 
@@ -47,7 +48,7 @@ Copy `.env.example` to `.env.local` and fill in:
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_FORM_ENDPOINT` | Where all three forms POST JSON (e.g. Formspree `https://formspree.io/f/…`). **Empty = demo mode**: nothing is sent, the thank-you message is shown. |
+| `NEXT_PUBLIC_FORM_ENDPOINT` | Where all three forms are sent — the Google Apps Script web-app URL (see "Forms → Google Sheets"); any JSON endpoint like Formspree also works. **Empty = demo mode**: nothing is sent, the thank-you message is shown. |
 | `NEXT_PUBLIC_FORM_ACCESS_KEY` | Only for services that need a public key in the body (e.g. Web3Forms). |
 | `NEXT_PUBLIC_SITE_URL` | Production URL, e.g. `https://donsergio.com.ua`. **Set it before the production build** — used for canonical links, `sitemap.xml`, `robots.txt` and social-share previews. |
 
@@ -116,6 +117,46 @@ page at `/blog/<slug>/` with its own SEO tags, is listed on the home page (newes
 - Changing a `slug` changes the article's URL (old links will 404).
 - The home page shows 3 articles; «Завантажити ще статті» shows 9 per page, with pagination when there are more than 9.
 
+## Forms → Google Sheets
+
+All three forms (quick-order popup, contact form, book pre-order) are saved to one Google Sheet, each to its own tab:
+
+| Form | Tab | Columns |
+| --- | --- | --- |
+| «Замовити послугу» popup | **Замовлення** | Дата · Послуга · Ім'я · Телефон / Messenger · Статус |
+| Contact form | **Контакти** | Дата · Послуга · Ім'я · Телефон · Дата та місто · Коментар · Статус |
+| Book pre-order | **Книга** | Дата · Ім'я · Телефон / Telegram · Email · Статус |
+
+Tabs and headers are created automatically on the first request. Newest requests are on top; «Статус» is a
+dropdown (Новий / Передзвонив / Домовились / Відмова). The script lives in `google-apps-script/Code.gs`
+(tabs, columns, statuses are configured at the top of that file).
+
+### One-time setup (≈15 min, in the browser)
+
+1. Create a Google Sheet, e.g. «Заявки donsergio.org».
+2. **Extensions → Apps Script**. Replace everything in `Code.gs` with the contents of
+   `google-apps-script/Code.gs` from this repo. Save (💾).
+3. **Deploy → New deployment** → ⚙️ type **Web app** →
+   *Execute as:* **Me** · *Who has access:* **Anyone** → **Deploy** → allow the permissions Google asks for
+   (it may warn "Google hasn't verified this app": **Advanced → Go to … (unsafe)** — it's your own script).
+4. Copy the **Web app URL** (`https://script.google.com/macros/s/…/exec`). Opening it in a browser should show
+   `{"ok":true,"service":"donsergio.org forms"}`.
+5. GitHub → Settings → Secrets and variables → Actions → **Variables** → `NEXT_PUBLIC_FORM_ENDPOINT` = that URL,
+   then redeploy (push, or Actions → Deploy → Run workflow).
+
+Optional alerts — in Apps Script: **Project Settings (⚙️) → Script properties**:
+
+| Property | Effect |
+| --- | --- |
+| `NOTIFY_EMAIL` | e-mail per request (comma-separate several addresses) |
+| `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` | Telegram message per request (bot from @BotFather; several chat ids comma-separated) |
+
+**Changing the script later:** paste the new code, then **Deploy → Manage deployments → ✏️ → Version: New version →
+Deploy**. This keeps the same URL — creating a *new deployment* would give a new URL.
+
+Spam protection: hidden honeypot field, basic validation, max 20 requests per minute. Tests for the script
+(run against fakes of the Google services): `npm run test:sheets`.
+
 ## Deployment (automatic)
 
 Every push to **`main`** builds the site and deploys it to Firebase Hosting — no CLI needed.
@@ -131,7 +172,7 @@ GitHub → Settings → Secrets and variables → Actions:
 | --- | --- | --- |
 | `FIREBASE_SERVICE_ACCOUNT` | secret | JSON key of the `github-deploy` service account (roles: Firebase Hosting Admin, API Keys Viewer, Cloud Run Viewer) |
 | `NEXT_PUBLIC_SITE_URL` | variable | `https://donsergio.org` |
-| `NEXT_PUBLIC_FORM_ENDPOINT` | variable, optional | form service URL — without it the forms run in demo mode |
+| `NEXT_PUBLIC_FORM_ENDPOINT` | variable | Google Apps Script web-app URL (see "Forms → Google Sheets") — without it the forms run in demo mode |
 | `NEXT_PUBLIC_FORM_ACCESS_KEY` | variable, optional | only for services that need it (e.g. Web3Forms) |
 
 Changing a variable takes effect on the next deploy (values are baked in at build time).
@@ -159,5 +200,6 @@ assets/images/       original (unoptimized) images — not deployed
 public/images/       generated, web-ready images (npm run images)
 scripts/             image optimization
 lib/                 form submission
+google-apps-script/  Google Sheets script for the forms (pasted into Apps Script, not deployed by CI)
 e2e/                 Playwright tests
 ```

@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from "react";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 import FormError from "../FormError";
+import Honeypot from "../Honeypot";
 import { useEscape, useModalTransition } from "../useModalTransition";
 
 type Props = { open: boolean; serviceName: string; onClose: () => void };
@@ -58,7 +59,8 @@ export default function BookingModal({ open, serviceName, onClose }: Props) {
         <p className="text-xs text-gold font-cinzel uppercase tracking-widest mb-6 break-words">{serviceName}</p>
 
         {status !== "success" && (
-          <form onSubmit={onSubmit} className="space-y-4">
+          <form onSubmit={onSubmit} className="relative space-y-4">
+            <Honeypot />
             <div>
               <label htmlFor="modal-name" className={labelClass}>Ваше ім&apos;я *</label>
               <input id="modal-name" name="name" type="text" required placeholder="Ім'я" className={inputClass} />

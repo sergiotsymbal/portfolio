@@ -2,8 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 3100;
 const E2E_DIST = ".e2e-build";
-/** Fake form endpoint baked into the test server; tests intercept it with page.route(). */
-export const TEST_FORM_ENDPOINT = "https://forms.e2e.test/submit";
+/** Fake Apps Script endpoint baked into the test build; tests intercept it with page.route(). */
+export const TEST_FORM_ENDPOINT = "https://script.google.com/macros/s/e2e-test/exec";
 
 export default defineConfig({
   testDir: "./e2e",
