@@ -1,0 +1,52 @@
+# Builds the static site and deploys it to Firebase Hosting (project: fromage-jamon)
+# on every push to `main`. Can also be started by hand: Actions → Deploy → Run workflow.
+#
+# Needs in GitHub → Settings → Secrets and variables → Actions:
+#   secret   FIREBASE_SERVICE_ACCOUNT   JSON key of the github-deploy service account
+#   variable NEXT_PUBLIC_SITE_URL       https://donsergio.org
+#   variable NEXT_PUBLIC_FORM_ENDPOINT  (optional) form service URL; empty = forms in demo mode
+#   variable NEXT_PUBLIC_FORM_ACCESS_KEY (optional) for services like Web3Forms
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deploy at a time; a newer push cancels an older deploy still in progress.
+concurrency:
+  group: deploy-live
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_FORM_ENDPOINT: ${{ vars.NEXT_PUBLIC_FORM_ENDPOINT }}
+          NEXT_PUBLIC_FORM_ACCESS_KEY: ${{ vars.NEXT_PUBLIC_FORM_ACCESS_KEY }}
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: fromage-jamon
+          channelId: live

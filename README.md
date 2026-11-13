@@ -5,7 +5,7 @@ Landing site built with Next.js (static export) + Tailwind CSS, ported from the 
 
 ## Requirements
 
-- Node.js 20+ (developed on Node 24)
+- Node.js 24 (see `.nvmrc`; the deploy uses the same version)
 - Google Chrome installed (used by the end-to-end tests — no extra browser download)
 
 ## Run locally
@@ -116,15 +116,35 @@ page at `/blog/<slug>/` with its own SEO tags, is listed on the home page (newes
 - Changing a `slug` changes the article's URL (old links will 404).
 - The home page shows 3 articles; «Завантажити ще статті» shows 9 per page, with pagination when there are more than 9.
 
-## Deploy
+## Deployment (automatic)
+
+Every push to **`main`** builds the site and deploys it to Firebase Hosting — no CLI needed.
+Progress and logs: GitHub → **Actions** → **Deploy**. A deploy takes ~2–3 minutes.
+To redeploy without a code change: Actions → Deploy → **Run workflow**.
+
+- Live site: https://donsergio.org (also https://fromage-jamon.web.app)
+- Firebase project: `fromage-jamon` · workflow: `.github/workflows/deploy.yml` · hosting config: `firebase.json`
+
+GitHub → Settings → Secrets and variables → Actions:
+
+| Name | Kind | Value |
+| --- | --- | --- |
+| `FIREBASE_SERVICE_ACCOUNT` | secret | JSON key of the `github-deploy` service account (roles: Firebase Hosting Admin, API Keys Viewer, Cloud Run Viewer) |
+| `NEXT_PUBLIC_SITE_URL` | variable | `https://donsergio.org` |
+| `NEXT_PUBLIC_FORM_ENDPOINT` | variable, optional | form service URL — without it the forms run in demo mode |
+| `NEXT_PUBLIC_FORM_ACCESS_KEY` | variable, optional | only for services that need it (e.g. Web3Forms) |
+
+Changing a variable takes effect on the next deploy (values are baked in at build time).
+
+Caching: pages are always re-validated (new deploys show up immediately); hashed build files are cached for a year,
+`/images/*` for 30 days — **when replacing an image, give the new file a new name**.
+
+Local preview of the production build:
 
 ```bash
 npm run build        # static site in out/
-npm start            # preview out/ locally
+npm start            # serves out/ locally
 ```
-
-Upload `out/` to any static host (Netlify, Vercel, Cloudflare Pages, GitHub Pages, plain nginx).
-`NEXT_PUBLIC_*` variables are baked in at build time — set them before `npm run build`.
 
 ## Project layout
 
