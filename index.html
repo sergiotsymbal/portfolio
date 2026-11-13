@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html id="main-html" lang="uk" class="scroll-smooth">
+<head id="main-head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гастроексперт | Фромаж'є & Кортадор (версія 2.01)</title>
+    <script id="tailwind-cdn" src="https://cdn.tailwindcss.com"></script>
+    <link id="font-awesome-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link id="google-fonts-preconnect-1" rel="preconnect" href="https://fonts.googleapis.com">
+    <link id="google-fonts-preconnect-2" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link id="google-fonts-css" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Cinzel:wght@600;700;800&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#FFF0B3',
+                            DEFAULT: '#E5C158',
+                            dark: '#B8860B',
+                            amber: '#D4AF37',
+                            copper: '#C58F3A'
+                        },
+                        gaudi: {
+                            dark: '#0B0A0D',
+                            card: '#141218',
+                            elevated: '#1C1924',
+                            border: '#3A3225'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style id="custom-styles">
+        /* Gaudí Gold Text & Sparkle Gradients */
+        .gaudi-gold-gradient {
+            background: linear-gradient(135deg, #FFF5C0 0%, #E5C158 35%, #D4AF37 65%, #9E7412 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Стилізація під Vivaldi та каліграфію */
+        .font-vivaldi {
+            font-family: 'Vivaldi', 'Vivaldi Italic', 'Great Vibes', 'Pinyon Script', cursive;
+        }
+
+        /* Float animation for the secondary hero image */
+        @keyframes heroFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-hero-float {
+            animation: heroFloat 2s ease-in-out infinite;
+        }
+
+        /* Header Style */
+        .gaudi-trencadís-mosaic-header {
+            background-color: #0B0A0D;
+        }
+
+        .gaudi-gold-bg {
+            background: linear-gradient(135deg, #F5D77F 0%, #D4AF37 50%, #9E7412 100%);
+        }
+
+        /* Gaudí Parabolic Arch & Organic Clip Paths */
+        .gaudi-arch-top {
+            border-radius: 120px 120px 24px 24px;
+        }
+
+        .gaudi-organic-radius-1 {
+            border-radius: 40px 100px 30px 80px / 80px 30px 100px 40px;
+        }
+
+        .gaudi-organic-radius-2 {
+            border-radius: 90px 30px 110px 40px / 40px 100px 30px 90px;
+        }
+
+        .gaudi-card-arch {
+            border-top-left-radius: 140px;
+            border-top-right-radius: 140px;
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+        }
+
+        /* Trencadís Texture Background Pattern */
+        .trencadis-bg {
+            background-color: #0B0A0D;
+            background-image: radial-gradient(rgba(212, 175, 55, 0.08) 1.5px, transparent 1.5px), radial-gradient(rgba(212, 175, 55, 0.05) 1.5px, #0B0A0D 1.5px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+
+        .gaudi-glow {
+            box-shadow: 0 10px 40px -10px rgba(229, 193, 88, 0.25);
+        }
+
+        .gaudi-glow-hover:hover {
+            box-shadow: 0 15px 50px -5px rgba(229, 193, 88, 0.4);
+            transform: translateY(-4px);
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Horizontal Convergence Reveal (Rostay Style) */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-70px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(70px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-left.revealed,
+        .reveal-right.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Staggered Delays for Grid Items */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* Book 3D Illustration Styles (Reference matching) */
+        .book-top-pages {
+            clip-path: polygon(0% 100%, 12% 0%, 100% 0%, 88% 100%);
+            background: repeating-linear-gradient(90deg, #1A1721, #1A1721 3px, #E5C158 4px, #1A1721 5px);
+        }
+        
+        .book-spine-3d {
+            clip-path: polygon(0% 6%, 100% 0%, 100% 100%, 0% 96%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0A0D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3A3225;
+            border-radius: 20px;
+            border: 2px solid #0B0A0D;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E5C158;
+        }
+    </style>
+</head>
+<body id="main-body" class="trencadis-bg text-neutral-200 font-sans antialiased selection:bg-gold selection:text-gaudi-dark overflow-x-hidden">
+
+    <!-- Навігаційна панель -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 gaudi-trencadís-mosaic-header backdrop-blur-md border-b-2 border-gold/40 shadow-2xl transition-all duration-300">
+        <div id="nav-inner-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="nav-flex-wrapper" class="flex items-center justify-between h-24 pt-2">
+                
+                <!-- Logo -->
+                <div id="nav-brand" class="flex items-center gap-3">
+                    <a id="nav-logo-link" href="#" class="flex items-center space-x-3 group bg-gaudi-dark/80 px-3 py-1.5 gaudi-organic-radius-1 border border-gold/40 backdrop-blur-sm">
+                        <div id="nav-logo-icon" class="w-12 h-12 gaudi-organic-radius-1 border-2 border-gold flex items-center justify-center text-gold font-serif text-xl font-bold bg-gaudi-dark/90 group-hover:gaudi-gold-bg group-hover:text-gaudi-dark transition duration-500 shadow-lg shadow-gold/20">
+                            DS
+                        </div>
+                        <div id="nav-logo-text-container" class="flex flex-col">
+                            <span id="nav-brand-title" class="font-vivaldi text-2xl sm:text-3xl font-normal tracking-wide gaudi-gold-gradient drop-shadow-md">Don Sergio</span>
+                            <span id="nav-brand-subtitle" class="text-[10px] sm:text-xs text-gold/90 uppercase tracking-widest font-semibold">Fromagier & Cortador</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu Links -->
+                <div id="nav-desktop-menu" class="hidden lg:flex items-center space-x-5 text-xs uppercase tracking-widest font-semibold text-neutral-200 bg-gaudi-dark/85 px-6 py-2.5 gaudi-organic-radius-1 border border-gold/30 backdrop-blur-md shadow-lg">
+                    <a id="nav-link-about" href="#about" class="hover:text-gold transition duration-300 relative py-1 hover:border-b-2 hover:border-gold">Про мене</a>
+                    <a id="nav-link-specializations" href="#specializations" class="hover:text-gold transition duration-300 relative py-1 hover:border-b-2 hover:border-gold">Напрямки</a>
+                    <a id="nav-link-instagram" href="#instagram" class="hover:text-gold transition duration-300 relative py-1 hover:border-b-2 hover:border-gold">Instagram</a>
+                    <a id="nav-link-tasting-event" href="#tasting-event" class="text-amber-300 flex items-center gap-2 hover:brightness-125 transition bg-amber-950/80 px-3 py-1.5 gaudi-organic-radius-1 border border-amber-500/50">
+                        <span id="nav-event-ping" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+                        Анонс події
+                    </a>
+                    <a id="nav-link-blog" href="#blog" class="hover:text-gold transition duration-300 relative py-1 hover:border-b-2 hover:border-gold">Блог</a>
+                    <a id="nav-link-book" href="#book" class="hover:text-gold transition duration-300 relative py-1 hover:border-b-2 hover:border-gold">Книга</a>
+                    <a id="nav-link-contacts" href="#contacts" class="hover:text-gold transition duration-300 relative py-1 hover:border-b-2 hover:border-gold">Контакти</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div id="nav-cta-container" class="hidden lg:block">
+                    <button id="nav-cta-btn" onclick="openBookingModal('Загальний виїзний запит')" class="px-4 py-3 gaudi-organic-radius-1 border border-gold text-gold bg-gaudi-dark/90 hover:gaudi-gold-bg hover:text-gaudi-dark transition duration-500 font-bold text-[10px] tracking-wider uppercase shadow-md hover:shadow-gold/40">
+                        Замовити послугу
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="block lg:hidden">
+                    <button id="mobile-menu-btn" class="p-2 text-gold focus:outline-none" aria-label="Відкрити меню">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-gaudi-card border-b border-gold/30 px-6 py-6 pt-10 space-y-4 gaudi-organic-radius-2 mx-4 my-2 shadow-2xl relative">
+            <a id="mobile-link-about" href="#about" class="block text-neutral-200 hover:text-gold text-sm uppercase tracking-wider font-semibold">Про мене</a>
+            <a id="mobile-link-specializations" href="#specializations" class="block text-neutral-200 hover:text-gold text-sm uppercase tracking-wider font-semibold">Напрямки</a>
+            <a id="mobile-link-instagram" href="#instagram" class="block text-neutral-200 hover:text-gold text-sm uppercase tracking-wider font-semibold">Instagram</a>
+            <a id="mobile-link-tasting-event" href="#tasting-event" class="block text-amber-300 text-sm uppercase tracking-wider font-bold">Найближча дегустація</a>
+            <a id="mobile-link-blog" href="#blog" class="block text-neutral-200 hover:text-gold text-sm uppercase tracking-wider font-semibold">Блог</a>
+            <a id="mobile-link-book" href="#book" class="block text-neutral-200 hover:text-gold text-sm uppercase tracking-wider font-semibold">Книга «Сир і вино»</a>
+            <a id="mobile-link-contacts" href="#contacts" class="block text-neutral-200 hover:text-gold text-sm uppercase tracking-wider font-semibold">Контакти</a>
+            <button id="mobile-cta-btn" onclick="openBookingModal('Мобільне меню')" class="w-full mt-4 py-3 gaudi-organic-radius-1 border-2 border-gold text-gold bg-gaudi-dark uppercase text-xs tracking-widest font-bold hover:gaudi-gold-bg hover:text-gaudi-dark transition">
+                Замовити послугу
+            </button>
+        </div>
+    </nav>
+
+    <!-- Головна секція (Hero) -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-start pt-32 pb-20 overflow-hidden border-b border-gold/20">
+
+        <div id="hero-bg-overlay" class="absolute inset-0 z-0 opacity-20 bg-cover bg-center filter brightness-50" style="background-image: url('https://i.postimg.cc/tJCMh8dP/jpeg-optimizer-IMG-6476.jpg');"></div>
+        
+        <!-- Ambient Glow -->
+        <div id="hero-glow-left" class="absolute w-[500px] h-[500px] bg-gold/10 rounded-full blur-3xl -top-20 -left-20 pointer-events-none"></div>
+        <div id="hero-glow-right" class="absolute w-[400px] h-[400px] bg-amber-600/10 rounded-full blur-3xl bottom-10 right-10 pointer-events-none"></div>
+
+        <!-- Sommelier Photo Left (U-Arch shape overlapping the main image with smooth float animation) -->
+        <div id="hero-image-left-small" class="hidden lg:block absolute z-[10] pointer-events-none w-[258px] h-[354px] max-w-[25vw] max-h-[50vh] right-[320px] xl:right-[380px] top-[calc(50%-90px)] -translate-y-1/2 animate-hero-float">
+            <div id="hero-img-wrapper-left" class="h-full w-full overflow-hidden shadow-2xl border border-gold/30" style="border-bottom-left-radius: 500px; border-bottom-right-radius: 500px;">
+                <img id="hero-img-left-el" src="https://i.postimg.cc/d38zBGgK/jpeg-optimizer-bb-vinoman-51.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&amp;w=800&amp;auto=format&amp;fit=crop'" alt="Гастроексперт Don Sergio" class="h-full w-full object-cover object-center opacity-95">
+            </div>
+        </div>
+
+        <!-- Sommelier Photo Right (Arch shape) -->
+        <div id="hero-image-right" class="absolute pointer-events-none hidden lg:block z-[6] w-[479px] h-[646px] max-w-[42vw] max-h-[85vh] right-0 lg:right-4 xl:right-12 top-[65px] translate-y-[20px]">
+            <div id="hero-img-wrapper-right" class="h-full w-full overflow-hidden shadow-2xl transition-all duration-700 border-l border-b border-gold/20" style="border-top-left-radius: 360px;">
+                <img id="hero-img-right-el" src="https://i.postimg.cc/MKq0HyZw/jpeg-optimizer-jpeg-optimizer-bb-vinoman-71.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&amp;fit=crop'" alt="Гастроексперт Don Sergio" class="h-full w-full object-cover object-center opacity-95">
+            </div>
+        </div>
+
+        <!-- Hero Main Content Box (Left-Aligned) -->
+        <div id="hero-content" class="max-w-3xl lg:ml-24 lg:mr-auto px-6 sm:px-10 lg:px-12 relative z-30 w-full flex flex-col items-start justify-center">
+            
+            <div id="hero-text-block" class="w-full text-left space-y-8 pt-4">
+                <div id="hero-tagline-badge" class="inline-flex items-center gap-3 px-5 py-2 gaudi-organic-radius-1 bg-gaudi-card border border-gold/40 text-gold text-xs tracking-[0.2em] uppercase font-semibold shadow-lg">
+                    <i class="fa-solid fa-crown text-gold"></i>
+                    <span>Культура еногастрономічного мистецтва &amp; Виїздні дегустації</span>
+                </div>
+
+                <h1 id="hero-main-heading" class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-neutral-100 leading-tight">
+                    У кожному смаку - цілий світ<br class="hidden sm:inline">
+                    <span id="hero-heading-highlight" class="gaudi-gold-gradient font-serif italic font-normal">сиру, вина та хамонів</span>
+                </h1>
+
+                <p id="hero-description-paragraph" class="max-w-2xl text-sm sm:text-base text-neutral-300 font-light leading-relaxed">
+                    Дегустації вишуканих сирів з винним пейрингом<br>
+                    Професійний супровід вашого заходу від виїзного<br>кортадора та сирного сомельє.<br>
+                    Шоу-нарізка хамону Іберіко ножем на Вашій події.<br>
+                    Проведення навчання персоналу роботі з продуктів гастрономії.
+                </p>
+
+                <div id="hero-buttons-container" class="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 pt-4">
+                    <button id="hero-btn-tasting" onclick="openBookingModal('Виїзна дегустація сиру з вином')" class="px-8 py-4 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-bold uppercase text-xs tracking-widest hover:brightness-110 transition shadow-xl shadow-gold/20">
+                        <i class="fa-solid fa-wine-glass mr-2"></i> Дегустація сиру &amp; вина
+                    </button>
+                    <button id="hero-btn-jamon" onclick="openBookingModal('Нарізка хамона')" class="px-8 py-4 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-bold uppercase text-xs tracking-widest hover:brightness-110 transition shadow-xl shadow-gold/20">
+                        <i class="fa-solid fa-utensils mr-2"></i> Нарізка хамона
+                    </button>
+                    <button id="hero-btn-course" onclick="openBookingModal('Курс по гастрономії')" class="px-8 py-4 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-bold uppercase text-xs tracking-widest hover:brightness-110 transition shadow-xl shadow-gold/20">
+                        <i class="fa-solid fa-graduation-cap mr-2"></i> Курс по гастрономії
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Секція «Про мене» -->
+    <section id="about" class="py-24 bg-gaudi-card/40 relative border-t border-b border-gold/20 overflow-hidden">
+
+        <div id="about-container" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6">
+            <div id="about-grid" class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                
+                <!-- About Photo Box (Moves in from the Left) -->
+                <div id="about-photo" class="md:col-span-5 flex flex-col items-center relative reveal-left">
+                    <div id="about-photo-wrapper" class="relative w-full max-w-md pt-4">
+                        <div id="about-img-frame" class="gaudi-organic-radius-1 overflow-hidden border-2 border-gold/40 shadow-2xl p-2 bg-gaudi-card">
+                            <img id="about-img-el" src="https://i.postimg.cc/c40P1pHD/5791.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop'"
+                                 alt="Сервіс гастроексперта" 
+                                 class="w-full h-[420px] object-cover gaudi-organic-radius-1 hover:scale-105 transition duration-700">
+                        </div>
+                        <div id="about-quote-box" class="absolute -bottom-6 -right-2 bg-gaudi-dark border-2 border-gold gaudi-organic-radius-2 p-5 max-w-xs shadow-2xl hidden sm:block">
+                            <p id="about-quote-text" class="font-serif italic text-sm text-gold">"Світ розкривається через смаки"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Text Box (Moves in from the Right) -->
+                <div id="about-text" class="md:col-span-7 space-y-6 relative pt-4 reveal-right">
+                    
+                    <div id="about-badge" class="inline-flex items-center gap-2 px-3 py-1 gaudi-organic-radius-1 border border-gold/40 bg-gaudi-card text-gold text-xs tracking-widest uppercase font-semibold mt-2">
+                        <i class="fa-solid fa-feather-pointed text-gold"></i>
+                        <span>ПРО МЕНЕ</span>
+                    </div>
+
+                    <h2 id="about-heading" class="text-3xl sm:text-4xl font-serif font-bold text-neutral-100">
+                        Культура сиру та вина у гармонії з іспанською пристрастю
+                    </h2>
+                    <p id="about-p1" class="text-neutral-300 font-light leading-relaxed">
+                        Гастрономія не обмежується географією, а цікавість до хороших продуктів не має національності. Я досліджую світ сирів, м'ясних делікатесів та вина, знайомлюся з виробниками, вивчаю традиції й відкриваю нові можливості їх поєднання.
+Мені подобається виходити за межі звичного, руйнувати стереотипи та доводити, що справжня гастрономічна культура починається не з місця народження, а з бажання пізнавати.
+                    </p>
+                    <p id="about-p2" class="text-neutral-300 font-light leading-relaxed">
+                       Як <strong class="text-gold font-normal">Фромаж'є</strong>, я створюю ексклюзивні сирні карти, підбираю рідкісні сири з Франції, Італії, Швейцарії та України, та поєдную їх із винами за принципами тонкого пейрингу.
+                    </p>
+                    <p id="about-p3" class="text-neutral-300 font-light leading-relaxed">
+                        Як <strong class="text-gold font-normal">досвідчений Кортадор</strong>, я володію класичною іспанською технікою професійної нарізки хамону (Jamón Ibérico & Serrano). Його шоу-нарізка у присутності гостей перетворює будь-яку подію на яскравий перформанс.
+                    </p>
+                    
+                    <div id="about-features-grid" class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-neutral-300">
+                        <div id="about-feat-1" class="flex items-center gap-3 bg-gaudi-dark/80 p-3 gaudi-organic-radius-1 border border-gold/30">
+                            <i class="fa-solid fa-gem text-gold"></i>
+                            <span>15+ років досвіду</span>
+                        </div>
+                        <div id="about-feat-2" class="flex items-center gap-3 bg-gaudi-dark/80 p-3 gaudi-organic-radius-2 border border-gold/30">
+                            <i class="fa-solid fa-wine-bottle text-gold"></i>
+                            <span>Підбір гастропоєднань</span>
+                        </div>
+                        <div id="about-feat-3" class="flex items-center gap-3 bg-gaudi-dark/80 p-3 gaudi-organic-radius-2 border border-gold/30">
+                            <i class="fa-solid fa-masks-theater text-gold"></i>
+                            <span>Шоу-подача та гастро-історії</span>
+                        </div>
+                        <div id="about-feat-4" class="flex items-center gap-3 bg-gaudi-dark/80 p-3 gaudi-organic-radius-1 border border-gold/30">
+                            <i class="fa-solid fa-truck-fast text-gold"></i>
+                            <span>Виїздне обслуговування</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Секція «Напрямки» -->
+    <section id="specializations" class="py-28 relative border-b border-gold/20">
+
+        <div id="specializations-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+            <div id="specializations-header" class="text-center max-w-2xl mx-auto mb-16 space-y-3 reveal-element">
+                <span id="spec-subtitle" class="text-gold text-xs uppercase tracking-widest font-bold font-cinzel">Послуги та напрямки</span>
+                <h2 id="spec-main-title" class="text-3xl sm:text-4xl font-serif font-bold text-neutral-100">
+                    Ексклюзивні гастрономічні виїзди
+                </h2>
+                <p id="spec-description" class="text-neutral-400 text-sm font-light">
+                    Оберіть бажаний формат для весілля, корпоративу, дня народження чи приватної вечірки.
+                </p>
+            </div>
+
+            <div id="specializations-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Specialization Card 1 -->
+                <div id="spec-fromagier" class="bg-gaudi-card border-2 border-gold/30 gaudi-organic-radius-1 p-8 flex flex-col justify-between hover:border-gold transition duration-500 shadow-2xl gaudi-glow-hover relative reveal-element delay-100">
+                    <div id="spec-fromagier-body" class="space-y-6 pt-4">
+                        <div id="spec-fromagier-icon" class="w-16 h-16 gaudi-organic-radius-2 border border-gold flex items-center justify-center text-gold text-2xl bg-amber-950/40">
+                            <i class="fa-solid fa-cheese"></i>
+                        </div>
+                        <div id="spec-fromagier-heading-box">
+                            <span class="text-[10px] text-gold uppercase tracking-widest font-bold">Фромаж'є</span>
+                            <h3 class="text-2xl font-serif font-bold text-neutral-100 mt-1">Сир & Вино</h3>
+                        </div>
+                        <p class="text-neutral-300 text-xs font-light leading-relaxed">
+                            Організація дегустацій сиру та вина. Експертний підхід до формування нових смаків. Формування сирних тарілок у закладах. Професійна еногастрономія
+                        </p>
+                        <ul id="spec-fromagier-list" class="text-xs text-neutral-400 space-y-2 pt-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> 5-6 видів європейських ексклюзивних сирів</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Пейринг з відповідними винами</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Розповідь історії кожного сиру та пояснення чому саме те чи інше вино до нього пасує</li>
+                        </ul>
+                    </div>
+                    <button id="spec-fromagier-btn" onclick="openBookingModal('Дегустація сиру з вином (Фромаж\'є)')" class="w-full mt-8 py-3.5 gaudi-organic-radius-1 border border-gold text-gold font-bold text-xs uppercase tracking-widest hover:gaudi-gold-bg hover:text-gaudi-dark transition">
+                        Замовити Фромаж'є/Сомельє
+                    </button>
+                </div>
+
+                <!-- Specialization Card 2 -->
+                <div id="spec-cortador" class="bg-gaudi-card border-2 border-gold/30 gaudi-organic-radius-2 p-8 flex flex-col justify-between hover:border-gold transition duration-500 shadow-2xl gaudi-glow-hover relative reveal-element delay-200">
+                    <div id="spec-cortador-body" class="space-y-6 pt-4">
+                        <div id="spec-cortador-icon" class="w-16 h-16 gaudi-organic-radius-1 border border-gold flex items-center justify-center text-gold text-2xl bg-amber-950/40">
+                            <i class="fa-solid fa-drumstick-bite"></i>
+                        </div>
+                        <div id="spec-cortador-heading-box">
+                            <span class="text-[10px] text-gold uppercase tracking-widest font-bold">Флейш-сомельє</span>
+                            <h3 class="text-2xl font-serif font-bold text-neutral-100 mt-1">Кортадор (Нарізка Хамону)</h3>
+                        </div>
+                        <p class="text-neutral-300 text-xs font-light leading-relaxed">
+                            Виїздна нарізка ніжок хамона Jamón Ibérico або Serrano на кістці. Філігранна нарізка професійним ножем тонких як папір скибочок безпосередньо при гостях.
+                        </p>
+                        <ul id="spec-cortador-list" class="text-xs text-neutral-400 space-y-2 pt-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Професійна хамонера та ножі</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Допомога у виборі та купівлі хамону</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Естетична подача</li>
+                        </ul>
+                    </div>
+                    <button id="spec-cortador-btn" onclick="openBookingModal('Послуги кортадора (Нарізка хамону)')" class="w-full mt-8 py-3.5 gaudi-organic-radius-2 border border-gold text-gold font-bold text-xs uppercase tracking-widest hover:gaudi-gold-bg hover:text-gaudi-dark transition">
+                        Замовити професійного Кортадора
+                    </button>
+                </div>
+
+                <!-- Specialization Card 3 -->
+                <div id="spec-complex" class="bg-gaudi-card border-2 border-gold/50 gaudi-organic-radius-1 p-8 flex flex-col justify-between hover:border-gold transition duration-500 shadow-2xl gaudi-glow-hover relative overflow-hidden reveal-element delay-300">
+                    <span id="spec-vip-tag" class="absolute top-6 right-6 z-10 bg-gold text-gaudi-dark text-[9px] font-bold px-2 py-1 rounded uppercase tracking-wider">
+                        VIP Преміум
+                    </span>
+                    <div id="spec-complex-body" class="space-y-6 pt-4">
+                        <div id="spec-complex-icon" class="w-16 h-16 gaudi-organic-radius-2 border border-gold flex items-center justify-center text-gold text-2xl bg-amber-950/40">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div id="spec-complex-heading-box">
+                            <span class="text-[10px] text-gold uppercase tracking-widest font-bold">Фромаж'є + Кортадор</span>
+                            <h3 class="text-2xl font-serif font-bold text-neutral-100 mt-1">Комплексне Гастро-шоу</h3>
+                        </div>
+                        <p class="text-neutral-300 text-xs font-light leading-relaxed">
+                            Найбільш затребуваний формат: поєднання нарізки хамону професійним кортадором та вишуканого сирно-винного дегустаційного сету для максимального враження гостей.
+                        </p>
+                        <ul id="spec-complex-list" class="text-xs text-neutral-400 space-y-2 pt-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Повна програма Фромаж'є + Кортадор</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Винний пейрінг кожного продукту</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Тривалість роботи: від 2 до 4 годин</li>
+                        </ul>
+                    </div>
+                    <button id="spec-complex-btn" onclick="openBookingModal('Комплексне шоу (Фромаж\'є + Кортадор)')" class="w-full mt-8 py-3.5 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-extrabold text-xs uppercase tracking-widest hover:brightness-110 transition shadow-lg">
+                        Замовити комплексне Гастро-шоу
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Секція «Instagram» -->
+    <section id="instagram" class="py-24 bg-gaudi-dark border-t border-b border-gold/20 relative">
+
+        <div id="instagram-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6">
+            
+            <div id="instagram-header" class="text-center max-w-2xl mx-auto mb-16 space-y-3 reveal-element">
+                <span id="insta-subtitle" class="text-gold text-xs uppercase tracking-widest font-bold font-cinzel">Соціальні мережі</span>
+                <h2 id="insta-title" class="text-3xl sm:text-4xl font-serif font-bold text-neutral-100">
+                    Слідкуйте за обома блогами в Інстаграм
+                </h2>
+                <p id="insta-description" class="text-neutral-400 text-sm font-light">
+                    Окремі профілі, присвячені культурі сиру та вина і мистецтву нарізки хамону.
+                </p>
+            </div>
+
+            <div id="instagram-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Instagram Profile 1 -->
+                <a id="insta-fromagier" href="https://www.instagram.com/don_sergio91?exln=YjdiMDNpdGdzenc3" target="_blank" rel="noopener nofollow" class="bg-gaudi-card border-2 border-gold/30 p-8 gaudi-organic-radius-1 hover:border-gold transition duration-500 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-2xl gaudi-glow-hover relative reveal-element delay-100 block group">
+                    <div id="insta-fromagier-icon-box" class="w-20 h-20 gaudi-organic-radius-2 border-2 border-gold p-1 flex-shrink-0 mt-4 sm:mt-2">
+                        <div class="w-full h-full gaudi-organic-radius-2 bg-amber-950/80 flex items-center justify-center text-gold text-3xl group-hover:scale-105 transition duration-300">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div id="insta-fromagier-content" class="text-center sm:text-left space-y-3 flex-grow pt-4 sm:pt-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-neutral-100 font-cinzel group-hover:text-gold transition duration-300">@don_sergio91</h3>
+                            <span class="px-3 py-1 bg-amber-500/20 text-gold text-[10px] uppercase tracking-wider rounded-full border border-gold/40 self-center sm:self-auto">Сир & Вино</span>
+                        </div>
+                        <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                            Огляди рідкісних сирів, гайди з винно-сирного пейрингу, поради по поєднанню продуктів гастрономії, естетичні фото та звіти з дегустацій.
+                        </p>
+                        <div id="insta-fromagier-link" class="inline-flex items-center gap-2 text-xs font-bold text-gold uppercase tracking-wider group-hover:brightness-125 pt-2">
+                            <span>Підписатися на сирний профіль</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-300"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Instagram Profile 2 -->
+                <a id="insta-cortador" href="https://www.instagram.com/jamon.kyiv?psln=cHUwaGRhY2R0Zzd3" target="_blank" rel="noopener nofollow" class="bg-gaudi-card border-2 border-gold/30 p-8 gaudi-organic-radius-2 hover:border-gold transition duration-500 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-2xl gaudi-glow-hover relative reveal-element delay-200 block group">
+                    <div id="insta-cortador-icon-box" class="w-20 h-20 gaudi-organic-radius-1 border-2 border-gold p-1 flex-shrink-0 mt-4 sm:mt-2">
+                        <div class="w-full h-full gaudi-organic-radius-1 bg-amber-950/80 flex items-center justify-center text-gold text-3xl group-hover:scale-105 transition duration-300">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div id="insta-cortador-content" class="text-center sm:text-left space-y-3 flex-grow pt-4 sm:pt-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-neutral-100 font-cinzel group-hover:text-gold transition duration-300">@jamon.kyiv</h3>
+                            <span class="px-3 py-1 bg-amber-500/20 text-gold text-[10px] uppercase tracking-wider rounded-full border border-gold/40 self-center sm:self-auto">Кортадор</span>
+                        </div>
+                        <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                             Поради щодо вибору м'ясних делікатесів<br>
+                             Нарізка хамона, атмосферні моменти з весіль, свят та івентів
+                        </p>
+                        <div id="insta-cortador-link" class="inline-flex items-center gap-2 text-xs font-bold text-gold uppercase tracking-wider group-hover:brightness-125 pt-2">
+                            <span>Підписатися на профіль кортадора</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-300"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Секція «Анонс події» -->
+    <section id="tasting-event" class="py-28 relative overflow-hidden border-b border-gold/20">
+
+        <div id="tasting-event-container" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6 reveal-element">
+            <div id="event-card" class="bg-gaudi-card border-2 border-gold/50 gaudi-organic-radius-1 p-8 sm:p-12 shadow-2xl gaudi-glow-hover transition duration-500 relative overflow-hidden">
+
+                <div id="event-bg-icon" class="absolute -right-10 -bottom-10 text-gold/5 text-9xl font-serif pointer-events-none">
+                    <i class="fa-solid fa-wine-glass"></i>
+                </div>
+
+                <div id="event-card-flex" class="flex flex-col md:flex-row items-center justify-between gap-8 pt-6">
+                    <div id="event-info-box" class="space-y-4 text-center md:text-left flex-grow">
+                        <div id="event-announcement-tag" class="inline-flex items-center gap-2 px-3 py-1 gaudi-organic-radius-1 bg-amber-500/20 text-gold border border-gold/40 text-[11px] font-bold uppercase tracking-widest">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                            <span>Анонс події • Найближча дегустація</span>
+                        </div>
+                        
+                        <h3 id="event-title" class="text-2xl sm:text-3xl font-serif font-bold text-neutral-100 gaudi-gold-gradient">
+                            Сир і Вино: "Ігриста Вакханалія"
+                        </h3>
+
+                        <div id="event-details-row" class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-neutral-300 font-medium">
+                            <div id="event-date-badge" class="flex items-center gap-2 bg-gaudi-dark px-3 py-1.5 gaudi-organic-radius-1 border border-gold/30">
+                                <i class="fa-regular fa-calendar-check text-gold"></i>
+                                <span id="event-date">25 Листопада 2026, 19:00</span>
+                            </div>
+                            <div id="event-location-badge" class="flex items-center gap-2 bg-gaudi-dark px-3 py-1.5 gaudi-organic-radius-2 border border-gold/30">
+                                <i class="fa-solid fa-location-dot text-gold"></i>
+                                <span id="event-location">
+                                м. Київ<br>
+                                Бар BAD BOY, Дніпровська набережна, 14к
+                                </span>
+                            </div>
+                        </div>
+
+                        <p id="event-description" class="text-neutral-300 text-xs font-light leading-relaxed max-w-2xl">
+                            Сир та ігристе — це те, що змушує відчувати мурахи по всьому тілу. Якщо, звичайно, ти ще щось відчуваєш. Тому приходь на дегустацію і перевіримо, чи ми можемо ще тебе здивувати. Чи може ти здивуєш нас<br>
+                            У програмі 6 видів виняткових сирів у парі з різними видами ігристих вин.<br>
+                            Будемо дегустувати, насолоджуватися, розбиратися у смаках та оцінювати що з цього найсмачніше
+                        </p>
+                    </div>
+
+                    <div id="event-action-box" class="flex-shrink-0 text-center">
+                        <a id="event-booking-link" href="https://badboy.ua/product/%D1%81%D0%B8%D1%80-%D1%96-%D0%B2%D0%B8%D0%BD%D0%BE-%D1%96%D0%B3%D1%80%D0%B8%D1%81%D1%82%D0%B0-%D0%B2%D0%B0%D0%BA%D1%85%D0%B0%D0%BD%D0%B0%D0%BB%D1%96%D1%8F/"
+                        target="_blank" rel="noopener nofollow" class="inline-block px-8 py-4 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-extrabold uppercase text-xs tracking-widest hover:brightness-110 transition shadow-xl shadow-gold/20 whitespace-nowrap">
+                            Придбати квиток<i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <span id="event-seats-note" class="block text-[10px] text-neutral-400 mt-2 font-light">Кількість місць обмежена</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секція «Книга» -->
+    <section id="book" class="py-28 bg-gaudi-dark border-t border-b border-gold/20 relative overflow-hidden">
+
+        <div id="book-container" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6">
+            <div id="book-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Book Cover Box -->
+                <div id="book-cover" class="lg:col-span-5 flex flex-col items-center relative reveal-left">
+                    <div id="book-img-wrapper" class="relative w-64 sm:w-72 h-[420px] rounded-2xl overflow-hidden shadow-2xl border-2 border-gold/40 group hover:border-gold transition duration-500 mt-6 bg-gaudi-card">
+                        <img id="book-ref-image" src="https://i.postimg.cc/851z2n9H/image-142bd9.jpg" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop'"
+                             alt="Книга Сир і Вино - Концептуальне видання" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                </div>
+
+                <!-- Book Form Box (Moves in from the Right) -->
+                <div id="book-form-container" class="lg:col-span-7 space-y-6 relative pt-6 reveal-right">
+
+                    <div id="book-form-badge" class="inline-flex items-center gap-2 px-4 py-1.5 gaudi-organic-radius-1 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs uppercase tracking-widest font-bold">
+                        <i class="fa-solid fa-pen-nib"></i>
+                        <span>Книга у процесі написання</span>
+                    </div>
+
+                    <h2 id="book-title" class="text-3xl sm:text-4xl font-serif font-bold text-neutral-100">
+                        Приєднайтесь до списку перших читачів книги «Сир і вино»
+                    </h2>
+
+                    <p id="book-desc" class="text-neutral-300 font-light text-sm leading-relaxed">
+                        Ця книга — натхненний путівник у світ сирно-винної культури. У ній зібрано секрети виробництва, правила температури подачі, класифікацію скоринок та матрицю сумісності з українськими й світовими винами.
+                    </p>
+
+                    <form id="book-form" onsubmit="handleBookPreorder(event)" class="space-y-4 pt-2">
+                        <div id="book-input-row" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div id="book-name-group">
+                                <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Ім'я *</label>
+                                <input id="book-input-name" type="text" required placeholder="Ваше ім'я" class="w-full bg-gaudi-card border border-gold/50 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition">
+                            </div>
+                            <div id="book-phone-group">
+                                <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Телефон / Telegram *</label>
+                                <input id="book-input-phone" type="text" required placeholder="+380 (99) 000-00-00" class="w-full bg-gaudi-card border border-gold/50 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition">
+                            </div>
+                        </div>
+
+                        <div id="book-email-group">
+                            <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Email (необов'язково)</label>
+                            <input id="book-input-email" type="email" placeholder="example@domain.com" class="w-full bg-gaudi-card border border-gold/50 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition">
+                        </div>
+
+                        <button id="book-submit-btn" type="submit" class="w-full sm:w-auto px-8 py-4 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-bold uppercase text-xs tracking-widest hover:brightness-110 transition shadow-lg">
+                            Залишити заявку на книгу
+                        </button>
+                    </form>
+
+                    <div id="book-success-msg" class="hidden p-4 bg-gold/10 border border-gold text-gold text-sm font-light gaudi-organic-radius-1">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Дякуємо! Вашу заявку прийнято. Ми повідомимо вас одразу після друку.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Секція «Блог» -->
+    <section id="blog" class="py-28 relative border-b border-gold/20">
+
+        <div id="blog-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+            <div id="blog-header" class="text-center max-w-2xl mx-auto mb-16 space-y-3 reveal-element">
+                <span id="blog-subtitle" class="text-gold text-xs uppercase tracking-widest font-bold font-cinzel">Гастрономічні статті</span>
+                <h2 id="blog-title" class="text-3xl sm:text-4xl font-serif font-bold text-neutral-100">
+                    Блог Гастроексперта
+                </h2>
+                <p id="blog-description" class="text-neutral-400 text-sm font-light">
+                    Цікаві замітки про секрети хамону, мистецтво пейрингу та вибір артизанальних сирів.
+                </p>
+            </div>
+
+            <!-- Сітка статей з можливістю завантаження додаткових публікацій -->
+            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-500 overflow-hidden">
+                <!-- Картки генеруються та динамічно переключаються через JS -->
+            </div>
+
+            <!-- Пагінація та кнопка "Завантажити ще" -->
+            <div id="blog-actions-wrapper" class="mt-12 flex flex-col items-center gap-6">
+                <button id="blog-load-more-btn" onclick="toggleExpandBlog()" class="px-8 py-4 gaudi-organic-radius-1 border-2 border-gold text-gold font-bold uppercase text-xs tracking-widest hover:gaudi-gold-bg hover:text-gaudi-dark transition duration-300 shadow-lg flex items-center gap-3">
+                    <span id="blog-load-more-text">Завантажити ще статті</span>
+                    <i id="blog-load-more-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                </button>
+
+                <!-- Контролери пагінації (з'являються при розгортанні 9 статей) -->
+                <div id="blog-pagination" class="hidden flex items-center justify-center gap-2 pt-2">
+                    <!-- Пагінаційні кнопки заповнюються скриптом -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальне вікно для читання статей з анімацією Fade-In та переключателями -->
+    <div id="article-modal" class="fixed inset-0 z-50 bg-gaudi-dark/90 backdrop-blur-md hidden items-center justify-center p-4 sm:p-6 transition-opacity duration-300 opacity-0">
+        <!-- Стрілка «Попередня стаття» -->
+        <button id="article-prev-btn" onclick="navigateArticle(-1)" class="fixed left-2 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 gaudi-organic-radius-1 border border-gold/50 bg-gaudi-card text-gold hover:gaudi-gold-bg hover:text-gaudi-dark flex items-center justify-center transition shadow-2xl disabled:opacity-30 disabled:pointer-events-none" aria-label="Попередня стаття">
+            <i class="fa-solid fa-chevron-left text-lg"></i>
+        </button>
+
+        <div id="article-modal-card" class="bg-gaudi-card border-2 border-gold/50 gaudi-organic-radius-1 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 relative shadow-2xl transform transition-transform duration-300 scale-95">
+            <button onclick="closeArticleModal()" class="absolute top-5 right-6 text-neutral-400 hover:text-gold text-2xl z-10" aria-label="Закрити статтю">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="article-modal-body" class="space-y-6">
+                <!-- Контент статті динамічно вставляється JS -->
+            </div>
+        </div>
+
+        <!-- Стрілка «Наступна стаття» -->
+        <button id="article-next-btn" onclick="navigateArticle(1)" class="fixed right-2 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 gaudi-organic-radius-1 border border-gold/50 bg-gaudi-card text-gold hover:gaudi-gold-bg hover:text-gaudi-dark flex items-center justify-center transition shadow-2xl disabled:opacity-30 disabled:pointer-events-none" aria-label="Наступна стаття">
+            <i class="fa-solid fa-chevron-right text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Секція «Галерея» -->
+    <section id="gallery" class="py-24 border-b border-gold/20 relative">
+
+        <div id="gallery-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+            <div id="gallery-header" class="text-center max-w-2xl mx-auto mb-16 space-y-3 reveal-element">
+                <span id="gallery-subtitle" class="text-gold text-xs uppercase tracking-widest font-bold font-cinzel">Атмосферні моменти</span>
+                <h2 id="gallery-title" class="text-3xl sm:text-4xl font-serif font-bold text-neutral-100">
+                    Естетика сиру, хамону та подачі
+                </h2>
+            </div>
+
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div id="gallery-item-1" class="relative group overflow-hidden border-2 border-gold/40 gaudi-organic-radius-1 h-80 shadow-xl reveal-element delay-100">
+                    <img id="gallery-img-1" src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop" 
+                         alt="Подача крафтових сирів" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div id="gallery-overlay-1" class="absolute inset-0 bg-gaudi-dark/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center p-6 text-center">
+                        <span class="text-gold font-serif text-xl">Подача крафтових сирів</span>
+                    </div>
+                </div>
+
+                <div id="gallery-item-2" class="relative group overflow-hidden border-2 border-gold/40 gaudi-organic-radius-2 h-80 shadow-xl reveal-element delay-200">
+                    <img id="gallery-img-2" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" 
+                         alt="Кортадор за роботою" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div id="gallery-overlay-2" class="absolute inset-0 bg-gaudi-dark/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center p-6 text-center">
+                        <span class="text-gold font-serif text-xl">Майстерність Кортадора</span>
+                    </div>
+                </div>
+
+                <div id="gallery-item-3" class="relative group overflow-hidden border-2 border-gold/40 gaudi-organic-radius-1 h-80 shadow-xl reveal-element delay-300">
+                    <img id="gallery-img-3" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" 
+                         alt="Вино та дегустації" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div id="gallery-overlay-3" class="absolute inset-0 bg-gaudi-dark/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center p-6 text-center">
+                        <span class="text-gold font-serif text-xl">Еногастрономічний пейринг</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Секція «Контакти» -->
+    <section id="contacts" class="py-28 bg-gaudi-card/80 border-t border-gold/20 relative">
+
+        <div id="contacts-container" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6">
+            <div id="contacts-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Contact Info Box -->
+                <div id="contact-info" class="lg:col-span-5 space-y-8 relative reveal-left">
+                    <div id="contact-info-header" class="pt-4">
+                        <span class="text-gold text-xs uppercase tracking-widest font-bold block mb-2 font-cinzel">Зв'язок</span>
+                        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-neutral-100">
+                            Обговоримо вашу подію?
+                        </h2>
+                        <p class="text-neutral-300 font-light text-sm mt-3 leading-relaxed">
+                            Забронюйте дату заздалегідь. Можливий виїзд у будь-який куточок України.
+                        </p>
+                    </div>
+
+                    <div id="contact-channels-list" class="space-y-6 text-sm font-light">
+                        <div id="contact-channel-phone" class="flex items-center gap-4">
+                            <div class="w-12 h-12 gaudi-organic-radius-1 border border-gold/40 flex items-center justify-center text-gold text-lg bg-gaudi-dark">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-neutral-400 text-xs uppercase font-semibold">Телефон / WhatsApp</div>
+                                <a href="tel:+380990000000" class="text-neutral-200 hover:text-gold font-medium">+380 (99) 000-00-00</a>
+                            </div>
+                        </div>
+
+                        <div id="contact-channel-telegram" class="flex items-center gap-4">
+                            <div class="w-12 h-12 gaudi-organic-radius-2 border border-gold/40 flex items-center justify-center text-gold text-lg bg-gaudi-dark">
+                                <i class="fa-brands fa-telegram"></i>
+                            </div>
+                            <div>
+                                <div class="text-neutral-400 text-xs uppercase font-semibold">Telegram</div>
+                                <a href="https://t.me" target="_blank" rel="noopener nofollow" class="text-neutral-200 hover:text-gold font-medium">@gastro_expert_ua</a>
+                            </div>
+                        </div>
+
+                        <div id="contact-channel-email" class="flex items-center gap-4">
+                            <div class="w-12 h-12 gaudi-organic-radius-1 border border-gold/40 flex items-center justify-center text-gold text-lg bg-gaudi-dark">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-neutral-400 text-xs uppercase font-semibold">E-mail</div>
+                                <a href="mailto:info@gastroexpert.ua" class="text-neutral-200 hover:text-gold font-medium">info@gastroexpert.ua</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Box -->
+                <div id="contact-form-container" class="lg:col-span-7 bg-gaudi-dark border-2 border-gold/40 gaudi-card-arch p-8 sm:p-10 shadow-2xl relative reveal-right">
+
+                    <h3 id="contact-form-title" class="text-2xl font-serif font-bold text-neutral-100 mb-6 pt-4">
+                        Залишити запит на замовлення
+                    </h3>
+
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div id="contact-form-inputs-row" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div id="contact-field-name">
+                                <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Ім'я *</label>
+                                <input id="contact-input-name" type="text" required placeholder="Ваше ім'я" class="w-full bg-gaudi-card border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition">
+                            </div>
+                            <div id="contact-field-phone">
+                                <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Телефон *</label>
+                                <input id="contact-input-phone" type="text" required placeholder="+380..." class="w-full bg-gaudi-card border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition">
+                            </div>
+                        </div>
+
+                        <div id="contact-field-service">
+                            <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Обрати послугу *</label>
+                            <select id="contact-select-service" class="w-full bg-gaudi-card border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition">
+                                <option value="Дегустація сиру та вина">Виїзна дегустація сиру з вином (Фромаж'є)</option>
+                                <option value="Послуги Кортадора">Послуги кортадора (Нарізка хамону)</option>
+                                <option value="Комплексне шоу">Комплексна програма (Фромаж'є + Кортадор)</option>
+                                <option value="Консультація">Консультація / Інший запит</option>
+                            </select>
+                        </div>
+
+                        <div id="contact-field-date-location">
+                            <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Дата та місто події</label>
+                            <input id="contact-input-date" type="text" placeholder="Наприклад: 20 Листопада, Київ" class="w-full bg-gaudi-card border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition">
+                        </div>
+
+                        <div id="contact-field-comment">
+                            <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Коментар / Кількість гостей</label>
+                            <textarea id="contact-input-comment" rows="3" placeholder="Додаткові побажання..." class="w-full bg-gaudi-card border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold transition"></textarea>
+                        </div>
+
+                        <button id="contact-submit-btn" type="submit" class="w-full py-4 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-extrabold uppercase text-xs tracking-widest hover:brightness-110 transition shadow-lg">
+                            Надіслати запит
+                        </button>
+                    </form>
+
+                    <div id="contact-success-msg" class="hidden mt-4 p-4 bg-gold/10 border border-gold text-gold text-sm font-light gaudi-organic-radius-1">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Дякуємо! Я зв'яжуся з вами найближчим часом.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальне вікно швидкого замовлення -->
+    <div id="booking-modal" class="fixed inset-0 z-50 bg-gaudi-dark/80 backdrop-blur-md hidden items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div id="modal-card" class="bg-gaudi-card border-2 border-gold gaudi-organic-radius-1 max-w-lg w-full p-6 sm:p-10 relative shadow-2xl overflow-hidden transform transition-transform duration-300 scale-95">
+
+            <button id="modal-close-btn" onclick="closeBookingModal()" class="absolute top-5 right-6 text-neutral-400 hover:text-gold text-xl z-10" aria-label="Закрити">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <h3 id="modal-title" class="text-2xl font-serif font-bold text-neutral-100 mb-2 pr-6 break-words pt-4">
+                Швидке замовлення
+            </h3>
+            <p id="modal-service-name" class="text-xs text-gold font-cinzel uppercase tracking-widest mb-6 break-words">Обрано послугу</p>
+
+            <form id="modal-form" onsubmit="handleModalSubmit(event)" class="space-y-4">
+                <div id="modal-field-name">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Ваше ім'я *</label>
+                    <input id="modal-input-name" type="text" required placeholder="Ім'я" class="w-full bg-gaudi-dark border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold">
+                </div>
+
+                <div id="modal-field-contact">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold">Телефон / Messenger *</label>
+                    <input id="modal-input-contact" type="text" required placeholder="+380..." class="w-full bg-gaudi-dark border border-gold/40 text-neutral-100 px-4 py-3 text-sm gaudi-organic-radius-1 focus:outline-none focus:border-gold">
+                </div>
+
+                <button id="modal-submit-btn" type="submit" class="w-full py-4 gaudi-organic-radius-1 gaudi-gold-bg text-gaudi-dark font-extrabold uppercase text-xs tracking-widest hover:brightness-110 transition">
+                    Підтвердити заявку
+                </button>
+            </form>
+
+            <div id="modal-success-msg" class="hidden mt-4 p-3 bg-gold/10 border border-gold text-gold text-xs gaudi-organic-radius-1">
+                <i class="fa-solid fa-circle-check mr-2"></i> Дякуємо! Заявку успішно надіслано.
+            </div>
+        </div>
+    </div>
+
+    <!-- Підвал сайту (Footer) -->
+    <footer id="footer" class="bg-gaudi-dark py-12 border-t border-gold/20 text-center text-xs text-neutral-400 relative">
+        <div id="footer-container" class="max-w-7xl mx-auto px-4 space-y-4 pt-2">
+            <div id="footer-logo" class="font-cinzel text-xl font-bold gaudi-gold-gradient tracking-widest">GASTRO EXPERT</div>
+            <p id="footer-tagline" class="font-light">Фромаж'є & Кортадор | Виїзні дегустаційні перформанси</p>
+            <div id="footer-copyright" class="pt-4 text-neutral-500">
+                &copy; 2026 Всі права захищено. Дизайн у стилістиці Modernisme & Antoni Gaudí.
+            </div>
+        </div>
+    </footer>
+
+    <script id="main-script">
+        // =========================================================================
+        // 1. МОБІЛЬНЕ МЕНЮ
+        // =========================================================================
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // =========================================================================
+        // 2. МОДАЛЬНЕ ВІКНО БРОНЮВАННЯ ПОСЛУГ
+        // =========================================================================
+        function openBookingModal(serviceName) {
+            const modal = document.getElementById('booking-modal');
+            const modalCard = document.getElementById('modal-card');
+            const serviceLabel = document.getElementById('modal-service-name');
+            const form = document.getElementById('modal-form');
+            const successMsg = document.getElementById('modal-success-msg');
+
+            if (!modal || !modalCard) return;
+
+            if (serviceLabel && serviceName) {
+                serviceLabel.textContent = serviceName;
+            }
+
+            if (form) form.classList.remove('hidden');
+            if (successMsg) successMsg.classList.add('hidden');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalCard.classList.remove('scale-95');
+                modalCard.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            const modalCard = document.getElementById('modal-card');
+            if (!modal || !modalCard) return;
+
+            modal.classList.add('opacity-0');
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+        }
+
+        function handleModalSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('modal-form');
+            const successMsg = document.getElementById('modal-success-msg');
+
+            if (form) form.classList.add('hidden');
+            if (successMsg) successMsg.classList.remove('hidden');
+
+            setTimeout(() => {
+                if (form) form.reset();
+                closeBookingModal();
+            }, 2200);
+        }
+
+        // =========================================================================
+        // 3. ОБРОБНИКИ ФОРМ (ПЕРЕДЗАМОВЛЕННЯ КНИГИ ТА КОНТАКТИ)
+        // =========================================================================
+        function handleBookPreorder(event) {
+            event.preventDefault();
+            const form = document.getElementById('book-form');
+            const successMsg = document.getElementById('book-success-msg');
+
+            if (form) form.classList.add('hidden');
+            if (successMsg) successMsg.classList.remove('hidden');
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('contact-success-msg');
+
+            if (form) form.classList.add('hidden');
+            if (successMsg) successMsg.classList.remove('hidden');
+        }
+
+        // =========================================================================
+        // 4. ІНТЕРАКТИВНИЙ БЛОГ З МОДАЛЬНИМ ВІКНОМ ТА ПАГІНАЦІЄЮ
+        // =========================================================================
+        const articlesData = [
+            {
+                id: 1,
+                tag: "Кортадор",
+                date: "28 Вересня 2026",
+                readTime: "5 хв читання",
+                title: "Секрети хамону Ibérico de Bellota: чому він цінується на вагу золота",
+                summary: "Чим жолудева відгодівля чорних іберійських свиней відрізняється від звичайного серрано та як правильно нарізати скибочку для максимального розкриття смаку.",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Хамон Ibérico de Bellota — це вершина світової гастрономії. Чорні іберійські свині вільно випасаються у дубових гаях (Дехесах) Іспанії, харчуючись виключно жолудями під час сезону монтанера.</p>
+                    <h4 class="text-xl font-serif font-bold text-gold mt-4">Чому саме жолуді?</h4>
+                    <p class="text-neutral-300 font-light leading-relaxed">Олеїнова кислота, що міститься в жолудях, насичує м'язові волокна корисними мононенасиченими жирами. Саме завдяки цьому жир тане вже при кімнатній температурі, створюючи шовковисту текстуру.</p>
+                    <h4 class="text-xl font-serif font-bold text-gold mt-4">Роль кортадора</h4>
+                    <p class="text-neutral-300 font-light leading-relaxed">Нарізка кортадором ножем має бути настільки точковою та тонкою, щоб скибочка танула на язику без додаткового розжовування. Неправильний товстий зріз повністю псує сприйняття цього делікатесу.</p>
+                `
+            },
+            {
+                id: 2,
+                tag: "Фромаж'є",
+                date: "20 Вересня 2026",
+                readTime: "4 хв читання",
+                title: "5 правил ідеальної сирної тарілки для домашньої дегустації",
+                summary: "Баланс продуктів, порядок подачі від ніжних козячих до насичених блакитних сирів, а також вибір медів, горіхів і соусів.",
+                image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Формування вишуканої сирної тарілки — це математика й естетика водночас. Важливо дотримуватися правильної хронології смаків.</p>
+                    <ul class="list-disc pl-5 text-neutral-300 space-y-2 font-light">
+                        <li><strong>Правило годинника:</strong> Розкладайте сири за годинниковою стрілкою від найніжнішого (м'який козячий або брі) до найпікантнішого (рокфор або витриманий гауда).</li>
+                        <li><strong>Різноманітність текстур:</strong> Поєднуйте м'які, напівтверді, тверді та блакитні сорти.</li>
+                        <li><strong>Температура подачі:</strong> Діставайте сири з холодильника за 45-60 хвилин до дегустації.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 3,
+                tag: "Пейринг",
+                date: "12 Вересня 2026",
+                readTime: "6 хв читання",
+                title: "Гастрономічні міфи: чому червоне вино не завжди пасує до сиру",
+                summary: "Розвінчуємо головний стереотип і розбираємо, чому білі сухі та кріплені вина часом набагато краще розкривають смак витриманих сирів.",
+                image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Багато хто переконаний, що червоне вино — універсальна пара до будь-якого сиру. Проте високий вміст танінів у червоних винах часто конфліктує із солями та білками сиру, викликаючи неприємну гіркоту.</p>
+                    <p class="text-neutral-300 font-light leading-relaxed">Білі вина з гарною кислотністю (наприклад, Совіньйон Блан чи Рислінг) ідеально освіжають рецептори після жирних вершкових сирів типу Брі та Камамбер.</p>
+                `
+            },
+            {
+                id: 4,
+                tag: "Кортадор",
+                date: "05 Вересня 2026",
+                readTime: "4 хв читання",
+                title: "Анатомія хамонери: як вибрати інструмент для професіонала",
+                summary: "Огляд поворотних і класичних підставок для хамону, особливості матеріалів та сталі для ножів кортадора.",
+                image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Хамонера — це не просто тримач, а фундамент безпечної та витонченої нарізки. Професійні кортадори використовують моделі з поворотним силіконовим або сталевим фіксатором копита.</p>
+                `
+            },
+            {
+                id: 5,
+                tag: "Фромаж'є",
+                date: "29 Серпня 2026",
+                readTime: "7 хв читання",
+                title: "Артезіанські сири Франції: від Альп до Нормандії",
+                summary: "Подорож маленькими сироварнями: специфіка сирого молока, теруару та визрівання в природних печерах.",
+                image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Французи кажуть: "Один день — один сир". Справжній крафтовий сир вариться з необробленого молока, збереженого з бактеріальною флорою альпійських луків.</p>
+                `
+            },
+            {
+                id: 6,
+                tag: "Пейринг",
+                date: "18 Серпня 2026",
+                readTime: "5 хв читання",
+                title: "Шампанське та Ігристі вина в парі із сирами та хамоном",
+                summary: "Чому бульбашки Брют і Кава створюють неперевершений контраст із солоними та вершковими делікатесами.",
+                image: "https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Гра бульбашок вуглекислого газу розбиває жирову плівку на язиці, даруючи відчуття легкості навіть при вживанні насичених сирів та хамону.</p>
+                `
+            },
+            {
+                id: 7,
+                tag: "Дегустації",
+                date: "10 Серпня 2026",
+                readTime: "4 хв читання",
+                title: "Етикет виїзних дегустацій: як здивувати ваших гостей",
+                summary: "Нюанси сервірування, підготовка бокалів, світла та температурного режиму для приватного івенту.",
+                image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Головне завдання дегустаційного вечора — створити атмосферу занурення. Освітлення має бути м'яким, а подача — порційно вивіреною.</p>
+                `
+            },
+            {
+                id: 8,
+                tag: "Кортадор",
+                date: "02 Серпня 2026",
+                readTime: "3 хв читання",
+                title: "Хамон vs Палета: в чому ключова різниця?",
+                summary: "Порівняльний аналіз задньої та передньої ноги іберійської свині: соковитість, витримка та нюанси нарізки.",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Палета — це передня лопатка, яка володіє вираженішим ароматом через близькість кістки. Хамон — задня нога з більш рівномірним розподілом жиру.</p>
+                `
+            },
+            {
+                id: 9,
+                tag: "Фромаж'є",
+                date: "25 Липня 2026",
+                readTime: "6 хв читання",
+                title: "Українські крафтові сири: нова хвиля гастрономічного відродження",
+                summary: "Огляд вітчизняних сироварень, які здобувають нагороди на World Cheese Awards.",
+                image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop",
+                content: `
+                    <p class="text-neutral-300 font-light leading-relaxed">Сучасні українські сировари сміливо експериментують із витримкою в селі або з додаванням місцевих трав, виходячи на світовий рівень.</p>
+                `
+            }
+        ];
+
+        let currentExpanded = false;
+        let currentPage = 1;
+        const itemsPerPage = 3;
+        let activeArticleIndex = 0;
+
+        function renderBlogGrid() {
+            const grid = document.getElementById('blog-grid');
+            if (!grid) return;
+
+            const visibleArticles = currentExpanded 
+                ? articlesData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                : articlesData.slice(0, 3);
+
+            grid.style.opacity = '0';
+            grid.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                grid.innerHTML = visibleArticles.map(article => `
+                    <article onclick="openArticleModal(${article.id})" class="bg-gaudi-card border-2 border-gold/30 gaudi-organic-radius-1 overflow-hidden flex flex-col justify-between hover:border-gold transition duration-500 shadow-2xl gaudi-glow-hover relative cursor-pointer group">
+                        <div>
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 bg-gaudi-dark/90 text-gold border border-gold/40 text-[10px] uppercase font-bold px-3 py-1 gaudi-organic-radius-1 z-10">${article.tag}</span>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <div class="flex items-center gap-3 text-[11px] text-gold/70">
+                                    <span><i class="fa-regular fa-calendar mr-1"></i>${article.date}</span>
+                                    <span>•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>${article.readTime}</span>
+                                </div>
+                                <h3 class="text-xl font-serif font-bold text-neutral-100 group-hover:text-gold transition">
+                                    ${article.title}
+                                </h3>
+                                <p class="text-neutral-300 text-xs font-light leading-relaxed">
+                                    ${article.summary}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <span class="text-xs font-bold text-gold uppercase tracking-wider group-hover:brightness-125 inline-flex items-center gap-2">
+                                <span>Читати повністю</span>
+                                <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition duration-300"></i>
+                            </span>
+                        </div>
+                    </article>
+                `).join('');
+
+                grid.style.opacity = '1';
+                grid.style.transform = 'translateY(0)';
+            }, 200);
+
+            renderPagination();
+        }
+
+        function toggleExpandBlog() {
+            currentExpanded = !currentExpanded;
+            currentPage = 1;
+            const btnText = document.getElementById('blog-load-more-text');
+            const btnIcon = document.getElementById('blog-load-more-icon');
+            const paginationEl = document.getElementById('blog-pagination');
+
+            if (currentExpanded) {
+                if (btnText) btnText.innerText = 'Згорнути блог';
+                if (btnIcon) btnIcon.classList.add('rotate-180');
+                if (paginationEl) paginationEl.classList.remove('hidden');
+            } else {
+                if (btnText) btnText.innerText = 'Завантажити ще статті';
+                if (btnIcon) btnIcon.classList.remove('rotate-180');
+                if (paginationEl) paginationEl.classList.add('hidden');
+            }
+
+            renderBlogGrid();
+        }
+
+        function renderPagination() {
+            const paginationEl = document.getElementById('blog-pagination');
+            if (!paginationEl || !currentExpanded) return;
+
+            const totalPages = Math.ceil(articlesData.length / itemsPerPage);
+            let html = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `
+                    <button onclick="goToBlogPage(${i})" class="w-9 h-9 gaudi-organic-radius-1 border ${i === currentPage ? 'bg-gold text-gaudi-dark border-gold font-bold' : 'border-gold/40 text-gold bg-gaudi-dark hover:border-gold'} transition text-xs flex items-center justify-center">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            paginationEl.innerHTML = html;
+        }
+
+        function goToBlogPage(page) {
+            currentPage = page;
+            renderBlogGrid();
+        }
+
+        function openArticleModal(articleId) {
+            activeArticleIndex = articlesData.findIndex(a => a.id === articleId);
+            if (activeArticleIndex === -1) return;
+
+            updateModalContent();
+
+            const modal = document.getElementById('article-modal');
+            const modalCard = document.getElementById('article-modal-card');
+            if (!modal || !modalCard) return;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalCard.classList.remove('scale-95');
+                modalCard.classList.add('scale-100');
+            }, 10);
+        }
+
+        function updateModalContent() {
+            const article = articlesData[activeArticleIndex];
+            const modalBody = document.getElementById('article-modal-body');
+            const prevBtn = document.getElementById('article-prev-btn');
+            const nextBtn = document.getElementById('article-next-btn');
+
+            if (!article || !modalBody) return;
+
+            modalBody.innerHTML = `
+                <div class="h-64 sm:h-80 overflow-hidden gaudi-organic-radius-1 relative">
+                    <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover">
+                    <span class="absolute top-4 left-4 bg-gaudi-dark/90 text-gold border border-gold/40 text-xs font-bold px-3 py-1 gaudi-organic-radius-1 uppercase tracking-wider">${article.tag}</span>
+                </div>
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center gap-3 text-xs text-gold/70">
+                        <span><i class="fa-regular fa-calendar mr-1"></i>${article.date}</span>
+                        <span>•</span>
+                        <span><i class="fa-regular fa-clock mr-1"></i>${article.readTime}</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-serif font-bold text-neutral-100 gaudi-gold-gradient">${article.title}</h3>
+                </div>
+                <div class="space-y-4 border-t border-gold/20 pt-4">
+                    ${article.content}
+                </div>
+            `;
+
+            if (prevBtn) prevBtn.disabled = activeArticleIndex === 0;
+            if (nextBtn) nextBtn.disabled = activeArticleIndex === articlesData.length - 1;
+        }
+
+        function navigateArticle(direction) {
+            const newIndex = activeArticleIndex + direction;
+            if (newIndex >= 0 && newIndex < articlesData.length) {
+                activeArticleIndex = newIndex;
+                updateModalContent();
+            }
+        }
+
+        function closeArticleModal() {
+            const modal = document.getElementById('article-modal');
+            const modalCard = document.getElementById('article-modal-card');
+            if (!modal || !modalCard) return;
+
+            modal.classList.add('opacity-0');
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+        }
+
+        // =========================================================================
+        // 5. АНІМАЦІЇ ПОЯВИ ПРИ ПРОКРУЧУВАННІ (INTERSECTION OBSERVER)
+        // =========================================================================
+        function initScrollReveal() {
+            const revealTargets = document.querySelectorAll('.reveal-element, .reveal-left, .reveal-right');
+            
+            if (!('IntersectionObserver' in window)) {
+                revealTargets.forEach(el => el.classList.add('revealed'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealTargets.forEach(el => observer.observe(el));
+        }
+
+        // =========================================================================
+        // 6. ІНІЦІАЛІЗАЦІЯ ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ
+        // =========================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBlogGrid();
+            initScrollReveal();
+
+            // Закриття модального вікна статті по кліку поза контентом
+            const articleModal = document.getElementById('article-modal');
+            if (articleModal) {
+                articleModal.addEventListener('click', (e) => {
+                    if (e.target === articleModal) closeArticleModal();
+                });
+            }
+
+            // Закриття модального вікна замовлення по кліку поза контентом
+            const bookingModal = document.getElementById('booking-modal');
+            if (bookingModal) {
+                bookingModal.addEventListener('click', (e) => {
+                    if (e.target === bookingModal) closeBookingModal();
+                });
+            }
+
+            // Підтримка клавіші Escape для закриття модальних вікон
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeArticleModal();
+                    closeBookingModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
