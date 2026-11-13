@@ -4,6 +4,7 @@ import { contactServiceOptions } from "@/data/services";
 import { contacts } from "@/data/site";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 import FormError from "../FormError";
+import FieldError from "../FieldError";
 import Honeypot from "../Honeypot";
 
 const inputClass =
@@ -17,7 +18,7 @@ const channels = [
 ];
 
 export default function Contacts() {
-  const { status, onSubmit } = useFormSubmit("contact");
+  const { status, onSubmit, errors, field } = useFormSubmit("contact");
 
   return (
     <section id="contacts" className="py-28 bg-gaudi-card/80 border-t border-gold/20 relative">
@@ -61,38 +62,43 @@ export default function Contacts() {
             <h3 className="text-2xl font-serif font-bold text-neutral-100 mb-6 pt-4">Залишити запит на замовлення</h3>
 
             {status !== "success" ? (
-              <form onSubmit={onSubmit} className="relative space-y-4">
+              <form onSubmit={onSubmit} noValidate className="relative space-y-4">
                 <Honeypot />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-name" className={labelClass}>Ім&apos;я *</label>
-                    <input id="contact-name" name="name" type="text" required placeholder="Ваше ім'я" className={inputClass} />
+                    <input id="contact-name" {...field("name", inputClass)} type="text" autoComplete="name" required placeholder="Ваше ім'я" />
+                    <FieldError form="contact" field="name" error={errors.name} />
                   </div>
                   <div>
                     <label htmlFor="contact-phone" className={labelClass}>Телефон *</label>
-                    <input id="contact-phone" name="phone" type="text" required placeholder="+380..." className={inputClass} />
+                    <input id="contact-phone" {...field("phone", inputClass)} type="tel" autoComplete="tel" required placeholder="+380..." />
+                    <FieldError form="contact" field="phone" error={errors.phone} />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="contact-service" className={labelClass}>Обрати послугу *</label>
-                  <select id="contact-service" name="service" className={inputClass}>
+                  <select id="contact-service" {...field("service", inputClass)}>
                     {contactServiceOptions.map((o) => (
                       <option key={o.value} value={o.value}>
                         {o.label}
                       </option>
                     ))}
                   </select>
+                  <FieldError form="contact" field="service" error={errors.service} />
                 </div>
 
                 <div>
                   <label htmlFor="contact-date" className={labelClass}>Дата та місто події</label>
-                  <input id="contact-date" name="dateCity" type="text" placeholder="Наприклад: 20 Листопада, Київ" className={inputClass} />
+                  <input id="contact-date" {...field("dateCity", inputClass)} type="text" placeholder="Наприклад: 20 Листопада, Київ" />
+                  <FieldError form="contact" field="dateCity" error={errors.dateCity} />
                 </div>
 
                 <div>
                   <label htmlFor="contact-comment" className={labelClass}>Коментар / Кількість гостей</label>
-                  <textarea id="contact-comment" name="comment" rows={3} placeholder="Додаткові побажання..." className={inputClass}></textarea>
+                  <textarea id="contact-comment" {...field("comment", inputClass)} rows={3} placeholder="Додаткові побажання..."></textarea>
+                  <FieldError form="contact" field="comment" error={errors.comment} />
                 </div>
 
                 <button

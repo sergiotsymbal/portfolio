@@ -44,3 +44,22 @@ test("book cover is the local optimized image and loads", async ({ page }) => {
   expect(await img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
   expect(await img.evaluate((el: HTMLImageElement) => el.currentSrc)).toMatch(/\/images\/book-cover(@2x)?\.webp$/);
 });
+
+test("buttons whose text turns dark on hover also get the gold background (text stays visible)", async ({ page }, info) => {
+  test.skip(info.project.name !== "desktop", "hover needs a mouse");
+  await gotoHome(page);
+  const buttons = page.locator('[class*="hover:text-gaudi-dark"]:visible');
+  const count = await buttons.count();
+  expect(count).toBeGreaterThan(3);
+  for (let i = 0; i < count; i++) {
+    const b = buttons.nth(i);
+    await b.scrollIntoViewIfNeeded();
+    await b.hover();
+    await expect
+      .poll(() => b.evaluate((el) => {
+        const cs = getComputedStyle(el);
+        return cs.backgroundImage.includes("gradient") || cs.backgroundColor === "rgb(229, 193, 88)";
+      }))
+      .toBe(true);
+  }
+});

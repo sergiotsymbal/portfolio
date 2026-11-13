@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from "react";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 import FormError from "../FormError";
+import FieldError from "../FieldError";
 import Honeypot from "../Honeypot";
 import { useEscape, useModalTransition } from "../useModalTransition";
 
@@ -15,7 +16,7 @@ const labelClass = "block text-xs uppercase tracking-wider text-neutral-300 mb-1
 export default function BookingModal({ open, serviceName, onClose }: Props) {
   const { mounted, visible } = useModalTransition(open);
   const extra = useMemo(() => ({ service: serviceName }), [serviceName]);
-  const { status, onSubmit, reset } = useFormSubmit("booking", extra);
+  const { status, onSubmit, reset, errors, field } = useFormSubmit("booking", extra);
 
   useEscape(onClose);
 
@@ -59,15 +60,17 @@ export default function BookingModal({ open, serviceName, onClose }: Props) {
         <p className="text-xs text-gold font-cinzel uppercase tracking-widest mb-6 break-words">{serviceName}</p>
 
         {status !== "success" && (
-          <form onSubmit={onSubmit} className="relative space-y-4">
+          <form onSubmit={onSubmit} noValidate className="relative space-y-4">
             <Honeypot />
             <div>
               <label htmlFor="modal-name" className={labelClass}>Ваше ім&apos;я *</label>
-              <input id="modal-name" name="name" type="text" required placeholder="Ім'я" className={inputClass} />
+              <input id="modal-name" {...field("name", inputClass)} type="text" autoComplete="name" required placeholder="Ім'я" />
+              <FieldError form="booking" field="name" error={errors.name} />
             </div>
             <div>
               <label htmlFor="modal-contact" className={labelClass}>Телефон / Messenger *</label>
-              <input id="modal-contact" name="contact" type="text" required placeholder="+380..." className={inputClass} />
+              <input id="modal-contact" {...field("contact", inputClass)} type="text" required placeholder="+380..." />
+              <FieldError form="booking" field="contact" error={errors.contact} />
             </div>
             <button
               type="submit"

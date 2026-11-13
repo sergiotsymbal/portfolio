@@ -2,6 +2,7 @@
 
 import { useFormSubmit } from "@/lib/useFormSubmit";
 import FormError from "../FormError";
+import FieldError from "../FieldError";
 import Honeypot from "../Honeypot";
 
 const inputClass =
@@ -9,7 +10,7 @@ const inputClass =
 const labelClass = "block text-xs uppercase tracking-wider text-neutral-300 mb-1 font-semibold";
 
 export default function Book() {
-  const { status, onSubmit } = useFormSubmit("book-preorder");
+  const { status, onSubmit, errors, field } = useFormSubmit("book-preorder");
 
   return (
     <section id="book" className="py-28 bg-gaudi-dark border-t border-b border-gold/20 relative overflow-hidden">
@@ -54,22 +55,25 @@ export default function Book() {
             </p>
 
             {status !== "success" ? (
-              <form onSubmit={onSubmit} className="relative space-y-4 pt-2">
+              <form onSubmit={onSubmit} noValidate className="relative space-y-4 pt-2">
                 <Honeypot />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="book-name" className={labelClass}>Ім&apos;я *</label>
-                    <input id="book-name" name="name" type="text" required placeholder="Ваше ім'я" className={inputClass} />
+                    <input id="book-name" {...field("name", inputClass)} type="text" autoComplete="name" required placeholder="Ваше ім'я" />
+                    <FieldError form="book-preorder" field="name" error={errors.name} />
                   </div>
                   <div>
                     <label htmlFor="book-phone" className={labelClass}>Телефон / Telegram *</label>
-                    <input id="book-phone" name="phone" type="text" required placeholder="+380 (99) 000-00-00" className={inputClass} />
+                    <input id="book-phone" {...field("phone", inputClass)} type="text" required placeholder="+380 (99) 000-00-00" />
+                    <FieldError form="book-preorder" field="phone" error={errors.phone} />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="book-email" className={labelClass}>Email (необов&apos;язково)</label>
-                  <input id="book-email" name="email" type="email" placeholder="example@domain.com" className={inputClass} />
+                  <input id="book-email" {...field("email", inputClass)} type="email" autoComplete="email" placeholder="example@domain.com" />
+                  <FieldError form="book-preorder" field="email" error={errors.email} />
                 </div>
 
                 <button

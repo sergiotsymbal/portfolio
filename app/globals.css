@@ -28,8 +28,13 @@
   background-color: #0B0A0D;
 }
 
-.gaudi-gold-bg {
-  background: linear-gradient(135deg, #F5D77F 0%, #D4AF37 50%, #9E7412 100%);
+/* A Tailwind utility (not plain CSS) so hover:/group-hover: variants work — e.g. outlined buttons
+   fill with gold on hover. As plain CSS, `hover:gaudi-gold-bg` did nothing while `hover:text-gaudi-dark`
+   still applied, leaving dark text on a dark button. */
+@layer utilities {
+  .gaudi-gold-bg {
+    background: linear-gradient(135deg, #F5D77F 0%, #D4AF37 50%, #9E7412 100%);
+  }
 }
 
 /* Gaudí Parabolic Arch & Organic Clip Paths */
