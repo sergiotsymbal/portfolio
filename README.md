@@ -62,7 +62,7 @@ Every submission includes a `form` field (`booking`, `contact` or `book-preorder
 | Services (cards + contact form options) | `data/services.ts` |
 | Phone / Telegram / e-mail | `data/contacts.json` — see below |
 | Gallery (auto-scrolling carousel from 3 photos up) | `data/gallery.ts` |
-| Event announcement | `components/sections/TastingEvent.tsx` |
+| Event announcements | `data/events.json` — see below |
 | Any section's layout/text | `components/sections/*.tsx` |
 | Local images | put the original in `assets/images/`, add a job in `scripts/optimize-images.mjs`, run `npm run images` → web-ready WebP/JPEG in `public/images/` |
 
@@ -84,6 +84,36 @@ read them from there.
 - `email` — the address.
 
 A typo (no digits in the phone, invalid username or e-mail) stops `npm run build` with a message naming the field.
+
+## Events
+
+Announcements live in **`data/events.json`**. Only upcoming events are shown, closest first; with 2+ events the
+section becomes a slider. An event disappears the day after its `date` (Kyiv time) — automatically, even without a
+redeploy — and when there are no upcoming events the section and its menu link are hidden.
+
+```json
+{
+  "events": [
+    {
+      "title": "Сир і Вино: \"Ігриста Вакханалія\"",
+      "date": "2026-11-25",
+      "time": "19:00",
+      "city": "м. Київ",
+      "venue": "Бар BAD BOY, Дніпровська набережна, 14к",
+      "description": ["Перший абзац…", "Другий абзац…"],
+      "ticketUrl": "https://…",
+      "ticketLabel": "Придбати квиток",
+      "note": "Кількість місць обмежена"
+    }
+  ]
+}
+```
+
+- **Required:** `title`, `date` (YYYY-MM-DD), `city`, `venue`, `description` (text or list of paragraphs).
+- **Optional:** `time` (HH:MM), `ticketUrl` (without it the button opens the booking form, and the request says which
+  event), `ticketLabel` (button text; default «Придбати квиток», or «Записатися» without a ticket link), `note`.
+- Order in the file doesn't matter. Past events can stay in the file — they're simply not shown.
+- A typo (bad date/time, missing field) stops `npm run build` with a message naming the event and field.
 
 ## Blog articles
 

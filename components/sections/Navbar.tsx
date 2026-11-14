@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { events, upcomingEvents } from "@/data/events";
+import { useKyivToday } from "@/lib/useKyivToday";
 import BookButton from "../booking/BookButton";
 
 const desktopLink =
@@ -18,8 +20,12 @@ const links = [
   { href: "/#contacts", label: "Контакти" },
 ];
 
-export default function Navbar() {
+/** `hasEventsAtBuild`: whether there were upcoming events at build time (used until the browser checks today's date). */
+export default function Navbar({ hasEventsAtBuild }: { hasEventsAtBuild: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const today = useKyivToday();
+  const hasEvents = today ? upcomingEvents(events, today).length > 0 : hasEventsAtBuild;
+  const visibleLinks = links.filter((l) => !l.event || hasEvents);
 
   return (
     <nav
@@ -50,7 +56,7 @@ export default function Navbar() {
 
           {/* Desktop Menu Links */}
           <div className="hidden lg:flex items-center space-x-5 text-xs uppercase tracking-widest font-semibold text-neutral-200 bg-gaudi-dark/85 px-6 py-2.5 gaudi-organic-radius-1 border border-gold/30 backdrop-blur-md shadow-lg">
-            {links.map((l) =>
+            {visibleLinks.map((l) =>
               l.event ? (
                 <Link
                   key={l.href}
@@ -95,7 +101,7 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       {mobileOpen && (
         <div className="lg:hidden bg-gaudi-card border-b border-gold/30 px-6 py-6 pt-10 space-y-4 gaudi-organic-radius-2 mx-4 my-2 shadow-2xl relative">
-          {links.map((l) => (
+          {visibleLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}

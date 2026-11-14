@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import BookingProvider from "@/components/booking/BookingProvider";
 import Footer from "@/components/sections/Footer";
 import Navbar from "@/components/sections/Navbar";
+import { events, kyivToday, upcomingEvents } from "@/data/events";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -48,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="uk" className={`scroll-smooth ${fonts}`}>
       <body className="trencadis-bg text-neutral-200 font-sans antialiased selection:bg-gold selection:text-gaudi-dark overflow-x-hidden">
         <BookingProvider>
-          <Navbar />
+          <Navbar hasEventsAtBuild={upcomingEvents(events, kyivToday()).length > 0} />
           {children}
           <Footer />
         </BookingProvider>
