@@ -32,3 +32,20 @@ test("page fits the device width (no zoom-out from horizontal overflow)", async 
   expect(await page.evaluate(() => window.innerWidth)).toBe(deviceWidth);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(deviceWidth);
 });
+
+test("menu link scrolls even when the URL already has that section's hash", async ({ page }, info) => {
+  await gotoHome(page);
+  const open = async () => {
+    if (info.project.name === "mobile") await page.getByRole("button", { name: "Відкрити меню" }).click();
+  };
+  await open();
+  await page.locator("#navbar").getByRole("link", { name: /^Блог$/ }).click();
+  await expect(page.locator("#blog")).toBeInViewport();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect(page.locator("#blog")).not.toBeInViewport();
+
+  await open();
+  await page.locator("#navbar").getByRole("link", { name: /^Блог$/ }).click();
+  await expect(page.locator("#blog")).toBeInViewport();
+  await expect(page).toHaveURL(/#blog$/);
+});

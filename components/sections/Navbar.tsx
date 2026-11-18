@@ -21,6 +21,20 @@ const links = [
 ];
 
 /** `hasEventsAtBuild`: whether there were upcoming events at build time (used until the browser checks today's date). */
+/**
+ * Section links on the home page: scroll ourselves. Next.js skips the scroll when the URL already ends in the
+ * same hash (e.g. tapping "Найближча подія" twice after scrolling away). On other pages Next.js navigates normally.
+ */
+function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  const id = href.split("#")[1];
+  const target = id && window.location.pathname === "/" ? document.getElementById(id) : null;
+  if (!target) return;
+  e.preventDefault();
+  history.replaceState(null, "", `#${id}`);
+  // Next frame: let the mobile menu close first so the layout is final.
+  requestAnimationFrame(() => target.scrollIntoView({ behavior: "smooth" }));
+}
+
 export default function Navbar({ hasEventsAtBuild }: { hasEventsAtBuild: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const today = useKyivToday();
@@ -61,13 +75,14 @@ export default function Navbar({ hasEventsAtBuild }: { hasEventsAtBuild: boolean
                 <Link
                   key={l.href}
                   href={l.href}
+                  onClick={(e) => scrollToSection(e, l.href)}
                   className="text-amber-300 flex items-center gap-2 hover:brightness-125 transition bg-amber-950/80 px-3 py-1.5 gaudi-organic-radius-1 border border-amber-500/50"
                 >
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
                   {l.label}
                 </Link>
               ) : (
-                <Link key={l.href} href={l.href} className={desktopLink}>
+                <Link key={l.href} href={l.href} onClick={(e) => scrollToSection(e, l.href)} className={desktopLink}>
                   {l.label}
                 </Link>
               ),
@@ -105,7 +120,10 @@ export default function Navbar({ hasEventsAtBuild }: { hasEventsAtBuild: boolean
             <Link
               key={l.href}
               href={l.href}
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => {
+                setMobileOpen(false);
+                scrollToSection(e, l.href);
+              }}
               className={l.event ? "block text-amber-300 text-sm uppercase tracking-wider font-bold" : mobileLink}
             >
               {l.mobileLabel ?? l.label}
