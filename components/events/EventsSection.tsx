@@ -64,7 +64,7 @@ export default function EventsSection({ all, atBuild }: Props) {
                 onClick={() => go(current - 1)}
                 disabled={current === 0}
                 aria-label="Попередня подія"
-                className="absolute left-0 sm:-left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 gaudi-organic-radius-1 border border-gold/50 bg-gaudi-card/90 text-gold hover:bg-gold hover:text-gaudi-dark flex items-center justify-center transition shadow-2xl disabled:opacity-30 disabled:pointer-events-none"
+                className="absolute left-0 sm:-left-6 xl:-left-16 top-1/2 -translate-y-1/2 z-10 w-11 h-11 gaudi-organic-radius-1 border border-gold/50 bg-gaudi-card/90 text-gold hover:bg-gold hover:text-gaudi-dark flex items-center justify-center transition shadow-2xl disabled:opacity-30 disabled:pointer-events-none"
               >
                 <i className="fa-solid fa-chevron-left"></i>
               </button>
@@ -72,7 +72,7 @@ export default function EventsSection({ all, atBuild }: Props) {
                 onClick={() => go(current + 1)}
                 disabled={current === list.length - 1}
                 aria-label="Наступна подія"
-                className="absolute right-0 sm:-right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 gaudi-organic-radius-2 border border-gold/50 bg-gaudi-card/90 text-gold hover:bg-gold hover:text-gaudi-dark flex items-center justify-center transition shadow-2xl disabled:opacity-30 disabled:pointer-events-none"
+                className="absolute right-0 sm:-right-6 xl:-right-16 top-1/2 -translate-y-1/2 z-10 w-11 h-11 gaudi-organic-radius-2 border border-gold/50 bg-gaudi-card/90 text-gold hover:bg-gold hover:text-gaudi-dark flex items-center justify-center transition shadow-2xl disabled:opacity-30 disabled:pointer-events-none"
               >
                 <i className="fa-solid fa-chevron-right"></i>
               </button>
