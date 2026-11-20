@@ -20,8 +20,8 @@ export default function EventCard({ event, badge }: { event: EventItem; badge: s
 
           <h3 className="text-2xl sm:text-3xl font-serif font-bold text-neutral-100 gaudi-gold-gradient">{event.title}</h3>
 
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-neutral-300 font-medium">
-            <div className="flex items-center gap-2 bg-gaudi-dark px-3 py-1.5 gaudi-organic-radius-1 border border-gold/30">
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-4 text-xs text-neutral-300 font-medium">
+            <div className="flex shrink-0 whitespace-nowrap items-center gap-2 bg-gaudi-dark px-3 py-1.5 gaudi-organic-radius-1 border border-gold/30">
               <i className="fa-regular fa-calendar-check text-gold"></i>
               <time dateTime={event.time ? `${event.date}T${event.time}` : event.date}>{formatEventDate(event)}</time>
             </div>
