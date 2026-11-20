@@ -66,7 +66,7 @@ test("several upcoming events: slider, closest first", async ({ page }) => {
 
 test("an event without a ticket link opens the booking popup", async ({ page }) => {
   const all = upcomingEvents(events, kyivToday());
-  const i = all.findIndex((e) => !e.ticketUrl);
+  const i = all.findIndex((e) => !e.ticketUrl && !e.ticketsSoon);
   test.skip(i < 0, "every event has a ticket link");
   await openOn(page, all[0].date);
   const section = page.locator("#tasting-event");

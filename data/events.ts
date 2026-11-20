@@ -16,6 +16,8 @@ export type EventItem = {
   description: string[];
   /** Ticket page. Without it the button opens the booking popup. */
   ticketUrl?: string;
+  /** Set when events.json has `"ticketUrl": "#"` or `""`: tickets not on sale yet, the button is disabled. */
+  ticketsSoon?: boolean;
   ticketLabel?: string;
   /** Small text under the button, e.g. "Кількість місць обмежена". */
   note?: string;
@@ -41,13 +43,19 @@ function validate(data: unknown): EventItem[] {
     if (!Array.isArray(desc) || desc.length === 0 || !desc.every((d) => typeof d === "string")) {
       fail('"description" must be text or a list of paragraphs');
     }
-    if (e.ticketUrl !== undefined && (typeof e.ticketUrl !== "string" || !/^https?:\/\//.test(e.ticketUrl))) {
-      fail('"ticketUrl" must start with https://');
+    const ticketsSoon = e.ticketUrl === "#" || e.ticketUrl === "";
+    if (e.ticketUrl !== undefined && !ticketsSoon && (typeof e.ticketUrl !== "string" || !/^https?:\/\//.test(e.ticketUrl))) {
+      fail('"ticketUrl" must start with https:// (or be "#" while tickets are not on sale yet)');
     }
     for (const f of ["ticketLabel", "note"]) {
       if (e[f] !== undefined && typeof e[f] !== "string") fail(`"${f}" must be text`);
     }
-    return { ...(e as EventItem), description: desc as string[] };
+    const event: EventItem = { ...(e as EventItem), description: desc as string[] };
+    if (ticketsSoon) {
+      delete event.ticketUrl;
+      event.ticketsSoon = true;
+    }
+    return event;
   });
 }
 

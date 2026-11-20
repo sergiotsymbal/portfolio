@@ -51,6 +51,10 @@ export default function EventCard({ event, badge }: { event: EventItem; badge: s
               {event.ticketLabel ?? "Придбати квиток"}
               <i className="fa-solid fa-arrow-right ml-2"></i>
             </a>
+          ) : event.ticketsSoon ? (
+            <button type="button" disabled className={`${ctaClass} opacity-50 cursor-not-allowed`}>
+              {event.ticketLabel ?? "Квитки незабаром"}
+            </button>
           ) : (
             <BookButton service={`Подія: ${event.title}, ${formatEventDate(event)}`} className={ctaClass}>
               {event.ticketLabel ?? "Записатися"}

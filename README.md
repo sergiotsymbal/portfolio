@@ -110,8 +110,10 @@ redeploy — and when there are no upcoming events the section and its menu link
 ```
 
 - **Required:** `title`, `date` (YYYY-MM-DD), `city`, `venue`, `description` (text or list of paragraphs).
-- **Optional:** `time` (HH:MM), `ticketUrl` (without it the button opens the booking form, and the request says which
-  event), `ticketLabel` (button text; default «Придбати квиток», or «Записатися» without a ticket link), `note`.
+- **Optional:** `time` (HH:MM), `ticketUrl`, `ticketLabel` (button text), `note`.
+- Button: with a `ticketUrl` it opens the ticket page (default text «Придбати квиток»); `"ticketUrl": "#"` (or `""`)
+  means tickets aren't on sale yet — the button is shown disabled (default «Квитки незабаром»); without `ticketUrl` it
+  opens the booking form and the request says which event (default «Записатися»).
 - Order in the file doesn't matter. Past events can stay in the file — they're simply not shown.
 - A typo (bad date/time, missing field) stops `npm run build` with a message naming the event and field.
 
