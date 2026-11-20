@@ -6,7 +6,7 @@ const ctaClass =
 
 export default function EventCard({ event, badge }: { event: EventItem; badge: string }) {
   return (
-    <div className="bg-gaudi-card border-2 border-gold/50 gaudi-organic-radius-1 p-8 sm:p-12 shadow-2xl gaudi-glow-hover transition duration-500 relative overflow-hidden h-full">
+    <div className="bg-gaudi-card border-2 border-gold/50 hover:border-gold transition-colors duration-500 gaudi-organic-radius-1 p-8 sm:p-12 shadow-2xl relative overflow-hidden h-full">
       <div className="absolute -right-10 -bottom-10 text-gold/5 text-9xl font-serif pointer-events-none">
         <i className="fa-solid fa-wine-glass"></i>
       </div>
